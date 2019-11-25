@@ -26,6 +26,11 @@ class UserViewController: UIViewController {
             }
         }
         
+        navigationItem.title = UserData.shared.name
+        let backButton = UIBarButtonItem(title: "Back", style: .plain, target: self, action: nil)
+        navigationItem.backBarButtonItem = backButton
+        navigationItem.backBarButtonItem?.tintColor = UIColor(red: 1/255, green: 194/255, blue: 176/255, alpha: 1)
+        
     }
     
     @IBOutlet var nameLabel: UILabel!
@@ -41,6 +46,7 @@ class UserViewController: UIViewController {
     }
     @IBAction func tapToSignOut(_ sender: UIBarButtonItem) {
         let alertController = UIAlertController(title: "Sign out", message: "Are you sure to sign out?", preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         let okAction = UIAlertAction(title: "OK", style: .default) { (_) in
             let alertController = UIAlertController(title: "Appreciate to see you next time.", message: nil, preferredStyle: .alert)
             alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: { (_) in
@@ -51,7 +57,6 @@ class UserViewController: UIViewController {
             }))
             self.present(alertController, animated: true, completion: nil)
         }
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         
         alertController.addAction(cancelAction)
         alertController.addAction(okAction)

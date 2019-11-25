@@ -45,5 +45,7 @@ struct RewardData: Codable {
         var descript: String
         var name: String
         var bonus: Int
+        var category: Int
+        var done: Int
     }
 }
