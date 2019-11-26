@@ -23,9 +23,6 @@ class MissionViewController: UIViewController {
                 self.missionTable.reloadData()
             }
         }
-        
-        navigationItem.title = "Mission History"
-        navigationController?.navigationBar.tintColor = UIColor(red: 1/255, green: 194/255, blue: 176/255, alpha: 1)
     }
 
     @IBOutlet var chooseButtons: [UIButton]! {
@@ -36,6 +33,27 @@ class MissionViewController: UIViewController {
         }
     }
     @IBOutlet var missionTable: UITableView!
+    
+    @IBAction func chooseSuccessfulMission(_ sender: UIButton) {
+        filterList = missionList.filter { ($0.done == 1) }
+        missionTable.reloadData()
+    }
+    @IBAction func chooseFailedMission(_ sender: UIButton) {
+        filterList = missionList.filter { ($0.done == 0) }
+        missionTable.reloadData()
+    }
+    @IBAction func chooseReportedMission(_ sender: UIButton) {
+        filterList = missionList.filter { ($0.reported_descript != nil) }
+        missionTable.reloadData()
+    }
+    @IBAction func chooseUnreportedMission(_ sender: UIButton) {
+        filterList = missionList.filter { ($0.reported_descript == nil) && ($0.chosen == 1) }
+        missionTable.reloadData()
+    }
+    @IBAction func chooseApplingMission(_ sender: UIButton) {
+        filterList = missionList.filter { ($0.chosen == 0) }
+        missionTable.reloadData()
+    }
 }
 
 extension MissionViewController {
@@ -70,7 +88,6 @@ extension MissionViewController {
         task.resume()
     }
     
-    
 }
 
 extension MissionViewController: UITableViewDataSource, UITableViewDelegate {
@@ -80,15 +97,25 @@ extension MissionViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cellIdentifier = "rewardCell"
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! RewardTableViewCell
-//        if navigationItem.searchController?.isActive == true {
-//            cell.setRewardData(searchRewardList, indexPath: indexPath)
-//        } else {
-//            cell.setRewardData(undoRewardList, indexPath: indexPath)
-//        }
-        
+        let cellIdentifier = "missionCell"
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! MissionTableViewCell
+            cell.setMissionData(filterList, indexPath: indexPath)
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+        if filterList[indexPath.row].reported_descript == nil && filterList[indexPath.row].chosen == 1 {
+            return indexPath
+        } else {
+            return nil
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let reportVC = storyboard?.instantiateViewController(withIdentifier: "reportVC") as? ReportedViewController {
+            reportVC.id = filterList[indexPath.row].reward_id
+            self.navigationController?.pushViewController(reportVC, animated: true)
+        }
     }
     
 }

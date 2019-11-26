@@ -20,7 +20,11 @@ class UserViewController: UIViewController {
                 if UserData.shared.role == 1 {
                     self.roleLabel.text = "Role: Mercenary"
                     self.caseLabel.text = "Case: \(userInfo.experience!)"
-                    self.rateLabel.text = "Rate: \(userInfo.achieveRate!)%"
+                    if userInfo.experience! == 0 {
+                        self.rateLabel.text = "Rate: 0 %"
+                    } else {
+                        self.rateLabel.text = "Rate: \(userInfo.achieveRate! / userInfo.experience!) %"
+                    }
                 } else {
                     self.roleLabel.text = "Role: Mortal"
                     self.caseLabel.isHidden = true

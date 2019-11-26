@@ -57,6 +57,8 @@ struct Reward: Codable {
         var name: String
         var user_rewards_id: Int
         var fee: Int
+        var achieveRate: Int
+        var experience: Int
     }
 }
 
@@ -79,5 +81,17 @@ struct HistoryAndPosts: Codable {
         var chosen: Int
         var done: Int?
     }
+    
+}
+
+struct HunterID: Codable {
+    
+    var user_reward_id: Int
+    
+}
+
+struct FinishMission: Codable {
+    
+    var done: Int
     
 }

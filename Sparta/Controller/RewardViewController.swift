@@ -19,6 +19,8 @@ class RewardViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        rewardTable.backgroundView = UIView()
+        
         getRewardData { (rewardData) in
             self.rewardList = rewardData.reward
             self.undoRewardList = self.rewardList.filter { ($0.done == nil) && ($0.chosen == 0) }
