@@ -12,6 +12,7 @@ class DecideViewController: UIViewController {
 
     var id: Int?
     var done: Int?
+    var repDe: String?
     var downloadCompletionBlock: ((_ data: Data) -> Void)?
     let downLoadURL = ""
     
@@ -24,6 +25,16 @@ class DecideViewController: UIViewController {
     }
     
     @IBOutlet var reportedImage: UIImageView!
+    @IBOutlet var reportedDescription: UILabel! {
+        didSet { reportedDescription.text = repDe }
+    }
+    @IBOutlet var decideButtons: [UIButton]! {
+        didSet {
+            for button in decideButtons {
+                setViewBorder(view: button, configSetting: .mainButton)
+            }
+        }
+    }
     @IBAction func missionSuccess(_ sender: UIButton) {
         done = 1
         finishMission()

@@ -50,7 +50,7 @@ class QualificationViewController: UIViewController {
 extension QualificationViewController {
     
     func setCountDownTime() {
-        var initialTime = 15
+        var initialTime = 20
         
         countDownTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { (timer) in
             self.countDownLabel.text = "剩餘時間： \(initialTime) 秒"

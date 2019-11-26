@@ -122,6 +122,7 @@ extension MercenaryViewController: UITableViewDataSource, UITableViewDelegate {
         } else if filterList[indexPath.row].reported_descript != nil && filterList[indexPath.row].done == nil {
             if let decideVC = storyboard?.instantiateViewController(withIdentifier: "decideVC") as? DecideViewController {
                 decideVC.id = filterList[indexPath.row].id
+                decideVC.repDe = filterList[indexPath.row].reported_descript
                 self.navigationController?.pushViewController(decideVC, animated: true)
             }
         }
