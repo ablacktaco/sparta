@@ -33,26 +33,51 @@ struct DecodeSignIn: Codable {
     }
 }
 
-struct UserMoney: Codable {
+struct UserInfo: Codable {
+    var id: Int
+    var achieveRate: Int?
+    var experience: Int?
     var money: Int
     var cost: Int
 }
 
+struct Reward: Codable {
+    var id: Int
+    var descript: String
+    var name: String
+    var reported_descript: String?
+    var hunters: [Hunter]
+    var budget: Int
+    var category: Int
+    var done: Int?
+    var chosen: Int
+    var user_id: Int
+    
+    struct Hunter: Codable {
+        var name: String
+        var user_rewards_id: Int
+        var fee: Int
+    }
+}
+
 struct RewardData: Codable {
     var reward: [Reward]
-    struct Reward: Codable {
-        var id: Int
-        var descript: String
+}
+
+struct HistoryAndPosts: Codable {
+    
+    var history: [History]
+    var posts: [Reward]
+    
+    struct History: Codable {
+        var reward_id: Int
         var name: String
-        var hunters: [Hunter]
-        var budget: Int
         var category: Int
-        var done: Int
-        
-        struct Hunter: Codable {
-            var id: Int
-            var name: String
-            var bonus: Int
-        }
+        var descript: String
+        var reported_descript: String?
+        var fee: Int
+        var chosen: Int
+        var done: Int?
     }
+    
 }

@@ -27,16 +27,17 @@ class RewardTableViewCell: UITableViewCell {
 
 extension RewardTableViewCell {
     
-    func setRewardData(_ rewardList: [RewardData.Reward], indexPath: IndexPath) {
+    func setRewardData(_ rewardList: [Reward], indexPath: IndexPath) {
         rewardName.text = rewardList[indexPath.row].name
         rewardDescription.text = rewardList[indexPath.row].descript
         rewardBonus.text = "Budget: $\(rewardList[indexPath.row].budget)"
         if rewardList[indexPath.row].hunters.count != 0 {
             for hunter in rewardList[indexPath.row].hunters {
-                rewardCompetitor.text = rewardCompetitor.text! + hunter + ","
+                rewardCompetitor.text = "Competitor: "
+                rewardCompetitor.text = rewardCompetitor.text! + hunter.name + ","
             }
         } else {
-            rewardCompetitor.text = "Nobody"
+            rewardCompetitor.text = "Competitor: Nobody"
         }
         if rewardList[indexPath.row].category == 1 {
             rewardType.image = UIImage(named: "kill")

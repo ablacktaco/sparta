@@ -14,7 +14,6 @@ class ReportedViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
     }
     
     @IBOutlet var completeImage: UIButton!
@@ -25,10 +24,10 @@ class ReportedViewController: UIViewController {
         pickPhoto()
     }
     @IBAction func tapToReport(_ sender: UIButton) {
-        let basePostURL = "https://httpbin.org/post"
-        let postFormData = ["para1" : "value1"]
-        let image = UIImage(named: "MAGNIFYING")
-        let uploadData = image!.jpegData(compressionQuality: 0.5)
+        let basePostURL = ""
+        let postFormData = ["descript" : completeDescription.text!]
+        let image = completeImage.image(for: .normal)
+        let uploadData = image!.jpegData(compressionQuality: 0.1)
         let dataPath = ["file" : uploadData!]
         requestWithFormData(urlString: basePostURL, parameters: postFormData, dataPath: dataPath, completion: { (data) in
             DispatchQueue.main.async {

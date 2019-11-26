@@ -13,16 +13,21 @@ class UserViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        getUserMoney { (userMoney) in
+        getUserMoney { (userInfo) in
             DispatchQueue.main.async {
+                UserData.shared.id = userInfo.id
                 self.nameLabel.text = UserData.shared.name
                 if UserData.shared.role == 1 {
                     self.roleLabel.text = "Role: Mercenary"
+                    self.caseLabel.text = "Case: \(userInfo.experience!)"
+                    self.rateLabel.text = "Rate: \(userInfo.achieveRate!)%"
                 } else {
                     self.roleLabel.text = "Role: Mortal"
+                    self.caseLabel.isHidden = true
+                    self.rateLabel.isHidden = true
                 }
-                self.moneyLabel.text = "Property: $\(userMoney.money)"
-                self.costLabel.text = "Reward: $\(userMoney.cost)"
+                self.moneyLabel.text = "Property: $\(userInfo.money)"
+                self.costLabel.text = "Reward: $\(userInfo.cost)"
             }
         }
         
@@ -37,6 +42,8 @@ class UserViewController: UIViewController {
     @IBOutlet var roleLabel: UILabel!
     @IBOutlet var moneyLabel: UILabel!
     @IBOutlet var costLabel: UILabel!
+    @IBOutlet var caseLabel: UILabel!
+    @IBOutlet var rateLabel: UILabel!
     @IBOutlet var userButtons: [UIButton]! {
         didSet {
             for button in userButtons {
@@ -64,6 +71,7 @@ class UserViewController: UIViewController {
         let okAction = UIAlertAction(title: "OK", style: .default) { (_) in
             let alertController = UIAlertController(title: "Appreciate to see you next time.", message: nil, preferredStyle: .alert)
             alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: { (_) in
+                UserData.shared.id = nil
                 UserData.shared.name = nil
                 UserData.shared.role = nil
                 UserData.shared.token = nil
@@ -82,7 +90,7 @@ class UserViewController: UIViewController {
 
 extension UserViewController {
     
-    func getUserMoney(closure: @escaping (UserMoney) -> Void) {
+    func getUserMoney(closure: @escaping (UserInfo) -> Void) {
                        
         let url = URL(string: "http://35.221.252.120/api/profile")!
         var request = URLRequest(url: url)
@@ -103,7 +111,7 @@ extension UserViewController {
                     let data = data,
                     let dataString = String(data: data, encoding: .utf8) {
                     print ("got data: \(dataString)")
-                    if let userMoney = try? JSONDecoder().decode(UserMoney.self, from: data) {
+                    if let userMoney = try? JSONDecoder().decode(UserInfo.self, from: data) {
                         closure(userMoney)
                     }
                 }

@@ -12,6 +12,7 @@ struct UserData {
     
     static var shared = UserData()
     
+    var id: Int?
     var name: String?
     var role: Int?
     var token: String?
