@@ -44,6 +44,20 @@ class UserViewController: UIViewController {
             }
         }
     }
+    
+    @IBAction func tapToHistory(_ sender: UIButton) {
+        if UserData.shared.role == 1 {
+            let storyboard = UIStoryboard(name: "Mercenary", bundle: nil)
+            if let mercenaryVC = storyboard.instantiateViewController(withIdentifier: "Mercenary") as? UITabBarController {
+                self.navigationController?.pushViewController(mercenaryVC, animated: true)
+            }
+        } else {
+            let storyboard = UIStoryboard(name: "Mortal", bundle: nil)
+            if let mortalVC = storyboard.instantiateViewController(withIdentifier: "Mortal") as? MortalViewController {
+                self.navigationController?.pushViewController(mortalVC, animated: true)
+            }
+        }
+    }
     @IBAction func tapToSignOut(_ sender: UIBarButtonItem) {
         let alertController = UIAlertController(title: "Sign out", message: "Are you sure to sign out?", preferredStyle: .alert)
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)

@@ -82,7 +82,7 @@ extension RewardViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         let searchString = searchController.searchBar.text!
         if let searchBonus = Int(searchString) {
-            searchRewardList = undoRewardList.filter { ($0.bonus >= searchBonus) }
+            searchRewardList = undoRewardList.filter { ($0.budget >= searchBonus) }
         } else {
             searchRewardList = undoRewardList.filter { ($0.name.contains(searchString)) }
         }

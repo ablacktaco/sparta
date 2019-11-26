@@ -27,7 +27,14 @@ class RegisterViewController: UIViewController {
     }
     
     @IBAction func tapToResign(_ sender: UIButton) {
-        postRegisterData()
+        if role.selectedSegmentIndex == 0 {
+            postRegisterData()
+        } else {
+            if let qualVC = self.storyboard?.instantiateViewController(withIdentifier: "qualVC") as? QualificationViewController {
+                qualVC.regiVC = self
+                self.present(qualVC, animated: true, completion: nil)
+            }
+        }
     }
     @IBAction func cancelRegister(_ sender: UIBarButtonItem) {
         dismiss(animated: true, completion: nil)

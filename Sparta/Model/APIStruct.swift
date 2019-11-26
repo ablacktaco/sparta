@@ -44,8 +44,15 @@ struct RewardData: Codable {
         var id: Int
         var descript: String
         var name: String
-        var bonus: Int
+        var hunters: [Hunter]
+        var budget: Int
         var category: Int
         var done: Int
+        
+        struct Hunter: Codable {
+            var id: Int
+            var name: String
+            var bonus: Int
+        }
     }
 }
