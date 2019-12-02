@@ -104,25 +104,21 @@ extension MercenaryViewController: UITableViewDataSource, UITableViewDelegate {
         return cell
     }
     
-//    func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
-//        if filterList[indexPath.row].reported_descript == nil && filterList[indexPath.row].chosen == 1 {
-//            return indexPath
-//        } else {
-//            return nil
-//        }
-//    }
-//
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if filterList[indexPath.row].chosen == 0 {
             if let chooseVC = storyboard?.instantiateViewController(withIdentifier: "chooseVC") as? ChooseHunterViewController {
                 chooseVC.hunters = filterList[indexPath.row].hunters
                 chooseVC.id = filterList[indexPath.row].id
+                chooseVC.mercenaryVC = self
                 self.navigationController?.pushViewController(chooseVC, animated: true)
             }
         } else if filterList[indexPath.row].reported_descript != nil && filterList[indexPath.row].done == nil {
             if let decideVC = storyboard?.instantiateViewController(withIdentifier: "decideVC") as? DecideViewController {
+                decideVC.missionTitle = filterList[indexPath.row].name
                 decideVC.id = filterList[indexPath.row].id
+                decideVC.img = filterList[indexPath.row].img
                 decideVC.repDe = filterList[indexPath.row].reported_descript
+                
                 self.navigationController?.pushViewController(decideVC, animated: true)
             }
         }

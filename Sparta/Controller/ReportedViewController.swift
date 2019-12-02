@@ -11,12 +11,19 @@ import UIKit
 class ReportedViewController: UIViewController {
 
     var id: Int?
-    var response : String?
+    var response: String?
+    var missionVC: MissionViewController?
+    var missionTitle: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        navigationController?.title = "Report Mission"
     }
     
+    @IBOutlet var titleLabel: UILabel! {
+        didSet { titleLabel.text = missionTitle }
+    }
     @IBOutlet var pickPhotoButton: UIButton!
     @IBOutlet var completeImage: UIImageView!
     @IBOutlet var completeDescription: UITextView!
@@ -66,8 +73,11 @@ extension ReportedViewController {
             }
         }
         
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        
         photoSourceRequestController.addAction(cameraAction)
         photoSourceRequestController.addAction(photoLibraryAction)
+        photoSourceRequestController.addAction(cancelAction)
         
         present(photoSourceRequestController, animated: true, completion: nil)
         
@@ -109,6 +119,29 @@ extension ReportedViewController {
             }
             if let response = response as? HTTPURLResponse {
                 print("status code: \(response.statusCode)")
+                if response.statusCode == 416 {
+                    DispatchQueue.main.async {
+                        let alertController = UIAlertController(title: "Error", message: "You must need to add a photo.", preferredStyle: .alert)
+                        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                        self.present(alertController, animated: true, completion: nil)
+                    }
+                    return
+                } else if response.statusCode == 200 {
+                    DispatchQueue.main.async {
+                        let alertController = UIAlertController(title: "Success", message: nil, preferredStyle: .alert)
+                        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: { (_) in
+                            self.missionVC?.getMissionHistory(closure: { (missionHistory) in
+                                self.missionVC?.missionList = missionHistory.history!
+                                self.missionVC?.filterList = (self.missionVC?.missionList.filter { ($0.done == 1) })!
+                                DispatchQueue.main.async {
+                                    self.missionVC?.missionTable.reloadData()
+                                }
+                            })
+                            self.navigationController?.popViewController(animated: true)
+                        }))
+                        self.present(alertController, animated: true, completion: nil)
+                    }
+                }
                 if let mimeType = response.mimeType,
                     mimeType == "multipart/form-data",
                     let data = data,

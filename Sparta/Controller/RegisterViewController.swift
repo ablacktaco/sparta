@@ -16,11 +16,16 @@ class RegisterViewController: UIViewController {
         name.addTarget(self, action: #selector(checkContent), for: .editingChanged)
         account.addTarget(self, action: #selector(checkContent), for: .editingChanged)
         password.addTarget(self, action: #selector(checkContent), for: .editingChanged)
+        bankAccount.addTarget(self, action: #selector(checkContent), for: .editingChanged)
+        
+        password.isSecureTextEntry = true
+        
     }
     
     @IBOutlet var name: UITextField!
     @IBOutlet var account: UITextField!
     @IBOutlet var password: UITextField!
+    @IBOutlet var bankAccount: UITextField!
     @IBOutlet var role: UISegmentedControl!
     @IBOutlet var confirmButton: UIButton! {
         didSet { setViewBorder(view: confirmButton, configSetting: .mainButton) }
@@ -45,7 +50,7 @@ class RegisterViewController: UIViewController {
 extension RegisterViewController {
     
     @objc func checkContent() {
-        if getEffectiveText(name) == "" || getEffectiveText(account) == "" || getEffectiveText(password) == "" {
+        if getEffectiveText(name) == "" || getEffectiveText(account) == "" || getEffectiveText(password) == "" || getEffectiveText(bankAccount) == "" {
             confirmButton.alpha = 0.2
             confirmButton.isEnabled = false
         } else {
@@ -55,7 +60,7 @@ extension RegisterViewController {
     }
     
     func postRegisterData() {
-        let registerData = Register(name: getEffectiveText(name), account: getEffectiveText(account), password: getEffectiveText(password), role: role.selectedSegmentIndex)
+        let registerData = Register(name: getEffectiveText(name), account: getEffectiveText(account), password: getEffectiveText(password), role: role.selectedSegmentIndex, bank_account: getEffectiveText(bankAccount))
         guard let uploadData = try? JSONEncoder().encode(registerData) else { return }
 
         let url = URL(string: "http://35.221.252.120/api/register")!

@@ -9,10 +9,19 @@
 import UIKit
 
 class UserViewController: UIViewController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationItem.title = UserData.shared.name
+        let backButton = UIBarButtonItem(title: "Back", style: .plain, target: self, action: nil)
+        navigationItem.backBarButtonItem = backButton
+        navigationItem.backBarButtonItem?.tintColor = UIColor(red: 1/255, green: 194/255, blue: 176/255, alpha: 1)
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         getUserMoney { (userInfo) in
             DispatchQueue.main.async {
                 UserData.shared.id = userInfo.id
@@ -23,7 +32,7 @@ class UserViewController: UIViewController {
                     if userInfo.experience! == 0 {
                         self.rateLabel.text = "Rate: 0 %"
                     } else {
-                        self.rateLabel.text = "Rate: \(userInfo.achieveRate! / userInfo.experience!) %"
+                        self.rateLabel.text = "Rate: \(userInfo.achieveRate! / userInfo.experience! * 100) %"
                     }
                 } else {
                     self.roleLabel.text = "Role: Mortal"
@@ -34,12 +43,6 @@ class UserViewController: UIViewController {
                 self.costLabel.text = "Reward: $\(userInfo.cost)"
             }
         }
-        
-        navigationItem.title = UserData.shared.name
-        let backButton = UIBarButtonItem(title: "Back", style: .plain, target: self, action: nil)
-        navigationItem.backBarButtonItem = backButton
-        navigationItem.backBarButtonItem?.tintColor = UIColor(red: 1/255, green: 194/255, blue: 176/255, alpha: 1)
-        
     }
     
     @IBOutlet var nameLabel: UILabel!
@@ -53,6 +56,12 @@ class UserViewController: UIViewController {
             for button in userButtons {
                 setViewBorder(view: button, configSetting: .mainButton)
             }
+        }
+    }
+    
+    @IBAction func tapToEarnMoney(_ sender: UIButton) {
+        if let gameVC = self.storyboard?.instantiateViewController(withIdentifier: "gameVC") as? GameViewController {
+            self.present(gameVC, animated: true, completion: nil)
         }
     }
     

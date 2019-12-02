@@ -11,19 +11,26 @@ import UIKit
 class DecideViewController: UIViewController {
 
     var id: Int?
+    var img: String?
     var done: Int?
     var repDe: String?
     var downloadCompletionBlock: ((_ data: Data) -> Void)?
-    let downLoadURL = ""
+    var mercenaryVC: MercenaryViewController?
+    var missionTitle: String?
+    
+    var key: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        downloadByDownloadTask(urlString: downLoadURL, completion: { (data) in
+        downloadByDownloadTask(urlString: img!, completion: { (data) in
             self.reportedImage.image = UIImage(data: data)
         })
     }
     
+    @IBOutlet var titleLabel: UILabel! {
+        didSet { titleLabel.text = missionTitle }
+    }
     @IBOutlet var reportedImage: UIImageView!
     @IBOutlet var reportedDescription: UILabel! {
         didSet { reportedDescription.text = repDe }
@@ -37,7 +44,16 @@ class DecideViewController: UIViewController {
     }
     @IBAction func missionSuccess(_ sender: UIButton) {
         done = 1
-        finishMission()
+        let alertController = UIAlertController(title: "Vertify", message: "Enter your bank key:", preferredStyle: .alert)
+        alertController.addTextField { (textField) in
+            textField.placeholder = "Enter your bank account's key..."
+        }
+        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: { (_) in
+            self.key = alertController.textFields?[0].text
+            self.finishMission()
+        }))
+        self.present(alertController, animated: true, completion: nil)
+        
     }
     @IBAction func missionFail(_ sender: UIButton) {
         done = 0
@@ -66,7 +82,7 @@ extension DecideViewController {
     
     func finishMission() {
         
-        let finishCondition = FinishMission(done: done!)
+        let finishCondition = FinishMission(done: done!, key: key)
         guard let uploadData = try? JSONEncoder().encode(finishCondition) else { return }
         
         let url = URL(string: "http://35.221.252.120/api/reward/\(id!)/done")!
@@ -83,6 +99,22 @@ extension DecideViewController {
             }
             if let response = response as? HTTPURLResponse {
                 print("status code: \(response.statusCode)")
+                if response.statusCode == 200 {
+                    DispatchQueue.main.async {
+                        let alertController = UIAlertController(title: "Success", message: nil, preferredStyle: .alert)
+                        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: { (_) in
+                            self.mercenaryVC?.getRewardHistory(closure: { (rewardHistory) in
+                                self.mercenaryVC?.rewardList = rewardHistory.posts
+                                self.mercenaryVC?.filterList = (self.mercenaryVC?.rewardList.filter { ($0.done == 1) })!
+                                DispatchQueue.main.async {
+                                    self.mercenaryVC?.rewardTable.reloadData()
+                                }
+                            })
+                            self.navigationController?.popViewController(animated: true)
+                        }))
+                        self.present(alertController, animated: true, completion: nil)
+                    }
+                }
                 if let mimeType = response.mimeType,
                     mimeType == "application/json",
                     let data = data,

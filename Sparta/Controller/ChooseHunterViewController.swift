@@ -13,6 +13,7 @@ class ChooseHunterViewController: UIViewController {
     var id: Int?
     var hunters = [Reward.Hunter]()
     var index: Int?
+    var mercenaryVC: MercenaryViewController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,6 +50,21 @@ extension ChooseHunterViewController {
                     let data = data,
                     let dataString = String(data: data, encoding: .utf8) {
                     print ("got data: \(dataString)")
+                    DispatchQueue.main.async {
+                        let alertController = UIAlertController(title: "Success", message: nil, preferredStyle: .alert)
+                        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: { (_) in
+                            self.mercenaryVC?.getRewardHistory(closure: { (rewardHistory) in
+                                self.mercenaryVC?.rewardList = rewardHistory.posts
+                                self.mercenaryVC?.filterList = (self.mercenaryVC?.rewardList.filter { ($0.done == 1) })!
+                                DispatchQueue.main.async {
+                                    self.mercenaryVC?.rewardTable.reloadData()
+                                }
+                            })
+                            self.navigationController?.popViewController(animated: true)
+                        }))
+                        self.present(alertController, animated: true, completion: nil)
+                    }
+                    
                 }
             }
         }

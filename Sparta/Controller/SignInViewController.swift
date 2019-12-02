@@ -16,6 +16,8 @@ class SignInViewController: UIViewController {
         account.addTarget(self, action: #selector(checkContent), for: .editingChanged)
         password.addTarget(self, action: #selector(checkContent), for: .editingChanged)
         
+        password.isSecureTextEntry = true
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {

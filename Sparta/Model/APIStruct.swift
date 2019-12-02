@@ -13,6 +13,7 @@ struct Register: Codable {
     var account: String
     var password: String
     var role: Int
+    var bank_account: String
 }
 
 struct DecodeRegister: Codable {
@@ -45,6 +46,7 @@ struct Reward: Codable {
     var id: Int
     var descript: String
     var name: String
+    var img: String?
     var reported_descript: String?
     var hunters: [Hunter]
     var budget: Int
@@ -68,7 +70,7 @@ struct RewardData: Codable {
 
 struct HistoryAndPosts: Codable {
     
-    var history: [History]
+    var history: [History]?
     var posts: [Reward]
     
     struct History: Codable {
@@ -84,6 +86,21 @@ struct HistoryAndPosts: Codable {
     
 }
 
+struct AddMission: Codable {
+    
+    var name: String
+    var category: Int
+    var budget: Int
+    var descript: String
+    
+}
+
+struct OfferPrice: Codable {
+    
+    var fee: Int
+    
+}
+
 struct HunterID: Codable {
     
     var user_reward_id: Int
@@ -93,5 +110,42 @@ struct HunterID: Codable {
 struct FinishMission: Codable {
     
     var done: Int
+    var key: String?
+    
+}
+
+struct Goods: Codable {
+    
+    var result: [Result]
+    
+    struct Result: Codable {
+        var id: Int
+        var item_name: String
+        var price: Int
+        var stock: Int
+        var pic: String
+    }
+    
+}
+
+struct BuyGoods: Codable {
+    
+    var item_id: Int
+    var count: Int
+    var key: String
+    
+}
+
+struct EarnMoney: Codable {
+    
+    var earned: Int
+    
+}
+
+struct ShoppingList: Codable {
+    
+    var name: String
+    var img: String
+    var created_at: String
     
 }

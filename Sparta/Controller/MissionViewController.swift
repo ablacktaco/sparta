@@ -16,8 +16,10 @@ class MissionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationItem.backBarButtonItem?.tintColor = UIColor(red: 1/255, green: 194/255, blue: 176/255, alpha: 1)
+        
         getMissionHistory { (missionHistory) in
-            self.missionList = missionHistory.history
+            self.missionList = missionHistory.history!
             self.filterList = self.missionList.filter { ($0.done == 1) }
             DispatchQueue.main.async {
                 self.missionTable.reloadData()
@@ -32,7 +34,9 @@ class MissionViewController: UIViewController {
             }
         }
     }
-    @IBOutlet var missionTable: UITableView!
+    @IBOutlet var missionTable: UITableView! {
+        didSet { missionTable.backgroundView = UIView() }
+    }
     
     @IBAction func chooseSuccessfulMission(_ sender: UIButton) {
         filterList = missionList.filter { ($0.done == 1) }
@@ -43,7 +47,7 @@ class MissionViewController: UIViewController {
         missionTable.reloadData()
     }
     @IBAction func chooseReportedMission(_ sender: UIButton) {
-        filterList = missionList.filter { ($0.reported_descript != nil) }
+        filterList = missionList.filter { ($0.reported_descript != nil) && ($0.done == nil) }
         missionTable.reloadData()
     }
     @IBAction func chooseUnreportedMission(_ sender: UIButton) {
@@ -113,7 +117,9 @@ extension MissionViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let reportVC = storyboard?.instantiateViewController(withIdentifier: "reportVC") as? ReportedViewController {
+            reportVC.missionTitle = filterList[indexPath.row].name
             reportVC.id = filterList[indexPath.row].reward_id
+            reportVC.missionVC = self
             self.navigationController?.pushViewController(reportVC, animated: true)
         }
     }

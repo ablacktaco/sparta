@@ -7,11 +7,24 @@
 //
 
 import UIKit
+import AVFoundation
 
 class MainViewController: UIViewController {
 
+    var spartaPlayer: AVAudioPlayer!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        spartaGifView.loadGif(name: "sparta")
+        
+        let url = Bundle.main.url(forResource: "background", withExtension: ".mp3")
+        do {
+            spartaPlayer = try AVAudioPlayer(contentsOf: url!)
+            spartaPlayer.play()
+        } catch {
+            print("Error:", error.localizedDescription)
+        }
     }
     
     @IBOutlet var mainButtons: [UIButton]! {
@@ -22,4 +35,5 @@ class MainViewController: UIViewController {
         }
     }
     
+    @IBOutlet var spartaGifView: UIImageView!
 }

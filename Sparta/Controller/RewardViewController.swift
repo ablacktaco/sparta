@@ -19,6 +19,9 @@ class RewardViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let backButton = UIBarButtonItem(title: "Back", style: .plain, target: self, action: nil)
+        navigationItem.backBarButtonItem = backButton
+        
         rewardTable.backgroundView = UIView()
         
         getRewardData { (rewardData) in
@@ -42,6 +45,12 @@ class RewardViewController: UIViewController {
     }
     
     @IBOutlet var rewardTable: UITableView!
+    @IBAction func tapToPassAddPage(_ sender: UIBarButtonItem) {
+        if let addVC = storyboard?.instantiateViewController(withIdentifier: "addVC") as? AddCaseViewController {
+            addVC.rewardVC = self
+            self.navigationController?.pushViewController(addVC, animated: true)
+        }
+    }
     
 }
 
@@ -76,7 +85,6 @@ extension RewardViewController {
         }
         task.resume()
     }
-    
 }
 
 extension RewardViewController: UISearchResultsUpdating {
@@ -116,5 +124,42 @@ extension RewardViewController: UITableViewDataSource, UITableViewDelegate {
         return cell
     }
     
+    func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+        if UserData.shared.role == 1 {
+            return indexPath
+        } else {
+            return nil
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if navigationItem.searchController?.isActive == true {
+            if UserData.shared.id == searchRewardList[indexPath.row].user_id {
+                let alertController = UIAlertController(title: "Error", message: "You can't apply your own case.", preferredStyle: .alert)
+                alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                self.present(alertController, animated: true, completion: nil)
+            } else {
+                if let applyVC = storyboard?.instantiateViewController(withIdentifier: "applyVC") as? ApplyViewController {
+                    applyVC.missionTitle.text = searchRewardList[indexPath.row].name
+                    applyVC.id = searchRewardList[indexPath.row].id
+                    applyVC.rewardVC = self
+                    self.navigationController?.pushViewController(applyVC, animated: true)
+                }
+            }
+        } else {
+            if UserData.shared.id == undoRewardList[indexPath.row].user_id {
+                let alertController = UIAlertController(title: "Error", message: "You can't apply your own case.", preferredStyle: .alert)
+                alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                self.present(alertController, animated: true, completion: nil)
+            } else {
+                if let applyVC = storyboard?.instantiateViewController(withIdentifier: "applyVC") as? ApplyViewController {
+                    applyVC.missionName = undoRewardList[indexPath.row].name
+                    applyVC.id = undoRewardList[indexPath.row].id
+                    applyVC.rewardVC = self
+                    self.navigationController?.pushViewController(applyVC, animated: true)
+                }
+            }
+        }
+    }
     
 }
