@@ -15,6 +15,9 @@ class AddCaseViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        collectImage.alpha = 0
+        collectionLabel.isHidden = true
+        
         navigationItem.title = "Add Mission"
         
         missionBudget.keyboardType = .numberPad
@@ -24,9 +27,19 @@ class AddCaseViewController: UIViewController {
         
         missionName.addTarget(self, action: #selector(checkContent), for: .editingChanged)
         missionBudget.addTarget(self, action: #selector(checkContent), for: .editingChanged)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
+        keyboardHide()
     }
     
-    @IBOutlet var missionName: UITextField!
+    @IBOutlet var killImage: UIImageView!
+    @IBOutlet var collectImage: UIImageView!
+    @IBOutlet var missionName: UITextField! {
+        didSet { missionName.placeholder = "Enter mission name" }
+    }
+    @IBOutlet var collectionLabel: UILabel!
     @IBOutlet var missionBudget: UITextField!
     @IBOutlet var missionType: UISegmentedControl!
     @IBOutlet var missionDescription: UITextView!
@@ -34,6 +47,19 @@ class AddCaseViewController: UIViewController {
         didSet { setViewBorder(view: addButton, configSetting: .mainButton) }
     }
     
+    @IBAction func tapToChangeCategory(_ sender: UISegmentedControl) {
+        if sender.selectedSegmentIndex == 0 {
+            killImage.alpha = 1
+            collectImage.alpha = 0
+            collectionLabel.isHidden = true
+            missionName.placeholder = "Enter mission name"
+        } else {
+            killImage.alpha = 0
+            collectImage.alpha = 1
+            collectionLabel.isHidden = false
+            missionName.placeholder = "Enter collected object"
+        }
+    }
     @IBAction func tapToAddMission(_ sender: UIButton) {
         addMission()
     }
@@ -58,10 +84,16 @@ extension AddCaseViewController {
     
     func addMission() {
         
-        let missionData = AddMission(name: missionName.text!, category: missionType.selectedSegmentIndex + 1, budget: Int( missionBudget.text!)!, descript: missionDescription.text)
+        var missionData = AddMission(name: "", category: 0, budget: 0, descript: "")
+        
+        if missionType.selectedSegmentIndex == 0 {
+            missionData = AddMission(name: missionName.text!, category: missionType.selectedSegmentIndex + 1, budget: Int( missionBudget.text!)!, descript: missionDescription.text)
+        } else {
+            missionData = AddMission(name: "蒐集\(missionName.text!)", category: missionType.selectedSegmentIndex + 1, budget: Int( missionBudget.text!)!, descript: missionDescription.text)
+        }
         guard let uploadData = try? JSONEncoder().encode(missionData) else { return }
             
-        let url = URL(string: "http://35.221.252.120/api/reward/")!
+        let url = URL(string: "http://34.80.65.255/api/reward/")!
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -75,6 +107,14 @@ extension AddCaseViewController {
             }
             if let response = response as? HTTPURLResponse {
                 print("status code: \(response.statusCode)")
+                if response.statusCode == 416 {
+                    DispatchQueue.main.async {
+                        let alertController = UIAlertController(title: "Your property can't afford the budget.", message: nil, preferredStyle: .alert)
+                        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                        self.present(alertController, animated: true, completion: nil)
+                    }
+                    return
+                }
                 if let mimeType = response.mimeType,
                     mimeType == "application/json",
                     let data = data,
@@ -100,7 +140,28 @@ extension AddCaseViewController {
         task.resume()
             
     }
-        
+    
+    @objc func keyboardShow(_ notification: Notification) {
+        let userInfo = notification.userInfo!
+        let keyboardSize = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+        let intersection = keyboardSize.intersection(self.view.frame)
+        self.view.frame.origin.y -= intersection.height - 100
+    }
+    
+    @objc func keyboardHide(_ notification: Notification) {
+        self.view.frame.origin.y = 0
+    }
+    
+    func keyboardHide() {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(keyboardDismiss))
+        tap.cancelsTouchesInView = false
+        self.view.addGestureRecognizer(tap)
+    }
+    
+    @objc func keyboardDismiss() {
+        self.view.endEditing(true)
+    }
+    
 }
 
 extension AddCaseViewController: UITextFieldDelegate {

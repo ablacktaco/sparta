@@ -13,10 +13,18 @@ class ChooseHunterViewController: UIViewController {
     var id: Int?
     var hunters = [Reward.Hunter]()
     var index: Int?
-    var mercenaryVC: MercenaryViewController?
+    var mercenaryVC: OfferViewController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        navigationItem.title = "Asigned hunter"
+        hunterTable.tableFooterView = UIView()
+    }
+    
+    @IBOutlet var hunterTable: UITableView!
+    @IBOutlet var assignedButton: UIButton! {
+        didSet { setViewBorder(view: assignedButton, configSetting: .mainButton) }
     }
     @IBAction func comfirmButton(_ sender: UIButton) {
         chooseHunter()
@@ -31,7 +39,7 @@ extension ChooseHunterViewController {
         let hunterID = HunterID(user_reward_id: hunters[index!].user_rewards_id)
         guard let uploadData = try? JSONEncoder().encode(hunterID) else { return }
         
-        let url = URL(string: "http://35.221.252.120/api/reward/\(id!)/choose")!
+        let url = URL(string: "http://34.80.65.255/api/reward/\(id!)/choose")!
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")

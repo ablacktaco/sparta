@@ -2,7 +2,7 @@
 //  MercenaryViewController.swift
 //  Sparta
 //
-//  Created by 陳姿穎 on 2019/11/26.
+//  Created by 陳姿穎 on 2019/12/5.
 //  Copyright © 2019 陳姿穎. All rights reserved.
 //
 
@@ -10,58 +10,66 @@ import UIKit
 
 class MercenaryViewController: UIViewController {
 
-    var rewardList = [Reward]()
-    var filterList = [Reward]()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        getRewardHistory { (rewardHistory) in
-            self.rewardList = rewardHistory.posts
-            self.filterList = self.rewardList.filter { ($0.done == 1) }
+        navigationItem.title = "Mercenary"
+        
+        let backButton = UIBarButtonItem(title: "Back", style: .plain, target: self, action: nil)
+        navigationItem.backBarButtonItem = backButton
+        navigationController?.navigationBar.tintColor = UIColor(red: 1/255, green: 194/255, blue: 176/255, alpha: 1)
+        
+        if UserData.shared.role == 0 {
+            offerButton.isHidden = true
+        }
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if UserData.shared.role == 0 {
+            offerButton.isHidden = true
+        }
+        
+        getUserMoney { (userInfo) in
             DispatchQueue.main.async {
-                self.rewardTable.reloadData()
+                self.moneyLabel.text = "Property: $\(userInfo.money)"
+                self.costLabel.text = "Reward cost: $\(userInfo.cost)"
             }
         }
+        
     }
     
-    @IBOutlet var chooseButtons: [UIButton]! {
+    @IBOutlet var moneyLabel: UILabel!
+    @IBOutlet var costLabel: UILabel!
+    @IBOutlet var offerButton: UIButton!
+    @IBOutlet var mercenaryButtons: [UIButton]! {
         didSet {
-            for button in chooseButtons {
-                setViewBorder(view: button, configSetting: .chooseButton)
+            for button in mercenaryButtons {
+                setViewBorder(view: button, configSetting: .mainButton)
             }
         }
     }
-    @IBOutlet var rewardTable: UITableView!
-    
-    @IBAction func chooseSuccessfulMission(_ sender: UIButton) {
-        filterList = rewardList.filter { ($0.done == 1) }
-        rewardTable.reloadData()
+    @IBAction func tapToPostedReward(_ sender: UIButton) {
+        let storyboard = UIStoryboard(name: "Mortal", bundle: nil)
+        if let mortalVC = storyboard.instantiateViewController(withIdentifier: "Mortal") as? PostViewController {
+            self.navigationController?.pushViewController(mortalVC, animated: true)
+        }
     }
-    @IBAction func chooseFailedMission(_ sender: UIButton) {
-        filterList = rewardList.filter { ($0.done == 0) }
-        rewardTable.reloadData()
-    }
-    @IBAction func chooseAssignedMission(_ sender: UIButton) {
-        filterList = rewardList.filter { ($0.chosen == 1) && ($0.reported_descript == nil) }
-        rewardTable.reloadData()
-    }
-    @IBAction func chooseUnassignedMission(_ sender: UIButton) {
-        filterList = rewardList.filter { ($0.chosen == 0) }
-        rewardTable.reloadData()
-    }
-    @IBAction func chooseReportedMission(_ sender: UIButton) {
-        filterList = rewardList.filter { ($0.reported_descript != nil) && $0.done == nil }
-        rewardTable.reloadData()
+    @IBAction func tapToManageOffer(_ sender: UIButton) {
+        let storyboard = UIStoryboard(name: "Mercenary", bundle: nil)
+        if let missionVC = storyboard.instantiateViewController(withIdentifier: "missionVC") as? MissionViewController {
+            self.navigationController?.pushViewController(missionVC, animated: true)
+        }
     }
     
 }
 
 extension MercenaryViewController {
     
-    func getRewardHistory(closure: @escaping (HistoryAndPosts) -> Void) {
+    func getUserMoney(closure: @escaping (UserInfo) -> Void) {
                        
-        let url = URL(string: "http://35.221.252.120/api/history")!
+        let url = URL(string: "http://34.80.65.255/api/profile")!
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -80,48 +88,13 @@ extension MercenaryViewController {
                     let data = data,
                     let dataString = String(data: data, encoding: .utf8) {
                     print ("got data: \(dataString)")
-                    if let rewardHistory = try? JSONDecoder().decode(HistoryAndPosts.self, from: data) {
-                        closure(rewardHistory)
+                    if let userMoney = try? JSONDecoder().decode(UserInfo.self, from: data) {
+                        closure(userMoney)
                     }
                 }
             }
         }
         task.resume()
-    }
-    
-}
-
-extension MercenaryViewController: UITableViewDataSource, UITableViewDelegate {
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return filterList.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cellIdentifier = "rewardHistoryCell"
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! MercenaryTableViewCell
-            cell.setRewardData(filterList, indexPath: indexPath)
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if filterList[indexPath.row].chosen == 0 {
-            if let chooseVC = storyboard?.instantiateViewController(withIdentifier: "chooseVC") as? ChooseHunterViewController {
-                chooseVC.hunters = filterList[indexPath.row].hunters
-                chooseVC.id = filterList[indexPath.row].id
-                chooseVC.mercenaryVC = self
-                self.navigationController?.pushViewController(chooseVC, animated: true)
-            }
-        } else if filterList[indexPath.row].reported_descript != nil && filterList[indexPath.row].done == nil {
-            if let decideVC = storyboard?.instantiateViewController(withIdentifier: "decideVC") as? DecideViewController {
-                decideVC.missionTitle = filterList[indexPath.row].name
-                decideVC.id = filterList[indexPath.row].id
-                decideVC.img = filterList[indexPath.row].img
-                decideVC.repDe = filterList[indexPath.row].reported_descript
-                
-                self.navigationController?.pushViewController(decideVC, animated: true)
-            }
-        }
     }
     
 }

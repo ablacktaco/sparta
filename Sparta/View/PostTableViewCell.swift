@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MortalTableViewCell: UITableViewCell {
+class PostTableViewCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -26,7 +26,7 @@ class MortalTableViewCell: UITableViewCell {
         
 }
 
-extension MortalTableViewCell {
+extension PostTableViewCell {
         
     func setRewardData(_ rewardList: [Reward], indexPath: IndexPath) {
         rewardName.text = rewardList[indexPath.row].name
@@ -35,7 +35,7 @@ extension MortalTableViewCell {
         if rewardList[indexPath.row].hunters.count != 0 {
             rewardCompetitor.text = "Hunter: "
             for hunter in rewardList[indexPath.row].hunters {
-                rewardCompetitor.text = rewardCompetitor.text! + hunter.name + ","
+                rewardCompetitor.text = rewardCompetitor.text! + hunter.name + ", "
             }
         } else {
             rewardCompetitor.text = "Hunter: Nobody"

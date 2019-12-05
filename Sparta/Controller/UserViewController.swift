@@ -28,19 +28,10 @@ class UserViewController: UIViewController {
                 self.nameLabel.text = UserData.shared.name
                 if UserData.shared.role == 1 {
                     self.roleLabel.text = "Role: Mercenary"
-                    self.caseLabel.text = "Case: \(userInfo.experience!)"
-                    if userInfo.experience! == 0 {
-                        self.rateLabel.text = "Rate: 0 %"
-                    } else {
-                        self.rateLabel.text = "Rate: \(userInfo.achieveRate! / userInfo.experience! * 100) %"
-                    }
                 } else {
                     self.roleLabel.text = "Role: Mortal"
-                    self.caseLabel.isHidden = true
-                    self.rateLabel.isHidden = true
                 }
                 self.moneyLabel.text = "Property: $\(userInfo.money)"
-                self.costLabel.text = "Reward: $\(userInfo.cost)"
             }
         }
     }
@@ -48,9 +39,6 @@ class UserViewController: UIViewController {
     @IBOutlet var nameLabel: UILabel!
     @IBOutlet var roleLabel: UILabel!
     @IBOutlet var moneyLabel: UILabel!
-    @IBOutlet var costLabel: UILabel!
-    @IBOutlet var caseLabel: UILabel!
-    @IBOutlet var rateLabel: UILabel!
     @IBOutlet var userButtons: [UIButton]! {
         didSet {
             for button in userButtons {
@@ -62,20 +50,6 @@ class UserViewController: UIViewController {
     @IBAction func tapToEarnMoney(_ sender: UIButton) {
         if let gameVC = self.storyboard?.instantiateViewController(withIdentifier: "gameVC") as? GameViewController {
             self.present(gameVC, animated: true, completion: nil)
-        }
-    }
-    
-    @IBAction func tapToHistory(_ sender: UIButton) {
-        if UserData.shared.role == 1 {
-            let storyboard = UIStoryboard(name: "Mercenary", bundle: nil)
-            if let mercenaryVC = storyboard.instantiateViewController(withIdentifier: "Mercenary") as? UITabBarController {
-                self.navigationController?.pushViewController(mercenaryVC, animated: true)
-            }
-        } else {
-            let storyboard = UIStoryboard(name: "Mortal", bundle: nil)
-            if let mortalVC = storyboard.instantiateViewController(withIdentifier: "Mortal") as? MortalViewController {
-                self.navigationController?.pushViewController(mortalVC, animated: true)
-            }
         }
     }
     @IBAction func tapToSignOut(_ sender: UIBarButtonItem) {
@@ -105,7 +79,7 @@ extension UserViewController {
     
     func getUserMoney(closure: @escaping (UserInfo) -> Void) {
                        
-        let url = URL(string: "http://35.221.252.120/api/profile")!
+        let url = URL(string: "http://34.80.65.255/api/profile")!
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")

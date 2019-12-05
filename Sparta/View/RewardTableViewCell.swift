@@ -32,9 +32,9 @@ extension RewardTableViewCell {
         rewardDescription.text = rewardList[indexPath.row].descript
         rewardBonus.text = "Budget: $\(rewardList[indexPath.row].budget)"
         if rewardList[indexPath.row].hunters.count != 0 {
-            rewardCompetitor.text = "Competitor: "
+            rewardCompetitor.text = "Competitors: "
             for hunter in rewardList[indexPath.row].hunters {
-                rewardCompetitor.text = rewardCompetitor.text! + hunter.name + ","
+                rewardCompetitor.text = rewardCompetitor.text! + hunter.name + ", "
             }
         } else {
             rewardCompetitor.text = "Competitor: Nobody"

@@ -20,6 +20,16 @@ struct DecodeRegister: Codable {
     var result: String
 }
 
+struct Bank: Codable {
+    var name: String
+    var account: String
+    var password: String
+}
+
+struct DecodeBank: Codable {
+    var key: String
+}
+
 struct SignIn: Codable {
     var account: String
     var password: String

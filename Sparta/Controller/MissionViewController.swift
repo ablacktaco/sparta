@@ -16,6 +16,10 @@ class MissionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let backButton = UIBarButtonItem(title: "Back", style: .plain, target: self, action: nil)
+        navigationItem.backBarButtonItem = backButton
+        
+        navigationItem.title = "Mission management"
         navigationItem.backBarButtonItem?.tintColor = UIColor(red: 1/255, green: 194/255, blue: 176/255, alpha: 1)
         
         getMissionHistory { (missionHistory) in
@@ -25,6 +29,11 @@ class MissionViewController: UIViewController {
                 self.missionTable.reloadData()
             }
         }
+        
+        for button in chooseButtons {
+            button.alpha = 0.3
+        }
+        chooseButtons[0].alpha = 1
     }
 
     @IBOutlet var chooseButtons: [UIButton]! {
@@ -35,26 +44,46 @@ class MissionViewController: UIViewController {
         }
     }
     @IBOutlet var missionTable: UITableView! {
-        didSet { missionTable.backgroundView = UIView() }
+        didSet { missionTable.tableFooterView = UIView() }
     }
     
     @IBAction func chooseSuccessfulMission(_ sender: UIButton) {
+        for button in chooseButtons {
+            button.alpha = 0.3
+        }
+        chooseButtons[0].alpha = 1
         filterList = missionList.filter { ($0.done == 1) }
         missionTable.reloadData()
     }
     @IBAction func chooseFailedMission(_ sender: UIButton) {
+        for button in chooseButtons {
+            button.alpha = 0.3
+        }
+        chooseButtons[1].alpha = 1
         filterList = missionList.filter { ($0.done == 0) }
         missionTable.reloadData()
     }
     @IBAction func chooseReportedMission(_ sender: UIButton) {
+        for button in chooseButtons {
+            button.alpha = 0.3
+        }
+        chooseButtons[2].alpha = 1
         filterList = missionList.filter { ($0.reported_descript != nil) && ($0.done == nil) }
         missionTable.reloadData()
     }
     @IBAction func chooseUnreportedMission(_ sender: UIButton) {
+        for button in chooseButtons {
+            button.alpha = 0.3
+        }
+        chooseButtons[3].alpha = 1
         filterList = missionList.filter { ($0.reported_descript == nil) && ($0.chosen == 1) }
         missionTable.reloadData()
     }
     @IBAction func chooseApplingMission(_ sender: UIButton) {
+        for button in chooseButtons {
+            button.alpha = 0.3
+        }
+        chooseButtons[4].alpha = 1
         filterList = missionList.filter { ($0.chosen == 0) }
         missionTable.reloadData()
     }
@@ -64,7 +93,7 @@ extension MissionViewController {
     
     func getMissionHistory(closure: @escaping (HistoryAndPosts) -> Void) {
                        
-        let url = URL(string: "http://35.221.252.120/api/history")!
+        let url = URL(string: "http://34.80.65.255/api/history")!
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")

@@ -31,7 +31,7 @@ extension ShoppingViewController {
     
     func getShopList(closure: @escaping ([ShoppingList]) -> Void) {
         
-        let url = URL(string: "http://35.221.252.120/api/bought")!
+        let url = URL(string: "http://34.80.65.255/api/bought")!
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")

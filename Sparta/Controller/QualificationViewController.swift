@@ -19,15 +19,12 @@ class QualificationViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        swordImageView.isHidden = true
-        shieldImageView.isHidden = true
-        setCountDownTime()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
+        setCountDownTime()
         makeQuestions(count)
         showQuestion(count, time: time)
     }
@@ -53,7 +50,7 @@ extension QualificationViewController {
         var initialTime = 20
         
         countDownTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { (timer) in
-            self.countDownLabel.text = "剩餘時間： \(initialTime) 秒"
+            self.countDownLabel.text = "Last: \(initialTime) s"
             if initialTime != 0 {
                 initialTime -= 1
             } else {
@@ -117,7 +114,7 @@ extension QualificationViewController {
         countDownTimer?.invalidate()
         let alertController = UIAlertController(title: "Success", message: "Congrate for you to be a mercenary", preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: { (_) in
-            self.dismiss(animated: true) {
+            self.regiVC?.dismiss(animated: true) {
                 self.regiVC?.postRegisterData()
             }
         }))

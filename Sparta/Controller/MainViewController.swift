@@ -34,6 +34,10 @@ class MainViewController: UIViewController {
             }
         }
     }
-    
     @IBOutlet var spartaGifView: UIImageView!
+    
+    @IBAction func tapToStopMusic(_ sender: UIButton) {
+        spartaPlayer.stop()
+    }
+    
 }

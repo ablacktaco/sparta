@@ -15,7 +15,7 @@ class DecideViewController: UIViewController {
     var done: Int?
     var repDe: String?
     var downloadCompletionBlock: ((_ data: Data) -> Void)?
-    var mercenaryVC: MercenaryViewController?
+    var mercenaryVC: OfferViewController?
     var missionTitle: String?
     
     var key: String?
@@ -85,7 +85,7 @@ extension DecideViewController {
         let finishCondition = FinishMission(done: done!, key: key)
         guard let uploadData = try? JSONEncoder().encode(finishCondition) else { return }
         
-        let url = URL(string: "http://35.221.252.120/api/reward/\(id!)/done")!
+        let url = URL(string: "http://34.80.65.255/api/reward/\(id!)/done")!
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")

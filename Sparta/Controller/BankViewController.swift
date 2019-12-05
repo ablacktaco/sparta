@@ -1,66 +1,62 @@
 //
-//  SignInViewController.swift
+//  BankViewController.swift
 //  Sparta
 //
-//  Created by 陳姿穎 on 2019/11/25.
+//  Created by 陳姿穎 on 2019/12/3.
 //  Copyright © 2019 陳姿穎. All rights reserved.
 //
 
 import UIKit
 
-class SignInViewController: UIViewController {
-    
+class BankViewController: UIViewController {
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        account.addTarget(self, action: #selector(checkContent), for: .editingChanged)
+
+        name.addTarget(self, action: #selector(checkContent), for: .editingChanged)
+        email.addTarget(self, action: #selector(checkContent), for: .editingChanged)
         password.addTarget(self, action: #selector(checkContent), for: .editingChanged)
         
         password.isSecureTextEntry = true
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         
-        account.text = ""
-        password.text = ""
+        navigationItem.title = "Create Bank Acc."
+        let backButton = UIBarButtonItem(title: "Back", style: .plain, target: self, action: nil)
+        navigationItem.backBarButtonItem = backButton
     }
-    
-    @IBOutlet var account: UITextField!
+
+    @IBOutlet var name: UITextField!
+    @IBOutlet var email: UITextField!
     @IBOutlet var password: UITextField!
-    @IBOutlet var signInButton: UIButton! {
-        didSet { setViewBorder(view: signInButton, configSetting: .mainButton) }
+    @IBOutlet var confirmButton: UIButton! {
+        didSet { setViewBorder(view: confirmButton, configSetting: .mainButton) }
     }
-    
-    @IBAction func tapToSignIn(_ sender: UIButton) {
-        postSignInData()
-    }
-    @IBAction func cancelSignIn(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
+
+    @IBAction func tapToResignBank(_ sender: UIButton) {
+        postBankData()
     }
     
 }
 
-extension SignInViewController {
+extension BankViewController {
     
     @objc func checkContent() {
-        if getEffectiveText(account) == "" || getEffectiveText(password) == "" {
-            signInButton.alpha = 0.2
-            signInButton.isEnabled = false
+        if getEffectiveText(name) == "" || getEffectiveText(email) == "" || getEffectiveText(password).count < 6 {
+            confirmButton.alpha = 0.2
+            confirmButton.isEnabled = false
         } else {
-            signInButton.alpha = 1
-            signInButton.isEnabled = true
+            confirmButton.alpha = 1
+            confirmButton.isEnabled = true
         }
     }
     
-    func postSignInData() {
-        let signInData = SignIn(account: getEffectiveText(account), password: getEffectiveText(password))
-        guard let uploadData = try? JSONEncoder().encode(signInData) else { return }
+    func postBankData() {
+        let registerData = Bank(name: getEffectiveText(name), account: getEffectiveText(email), password: getEffectiveText(password))
+        guard let uploadData = try? JSONEncoder().encode(registerData) else { return }
 
-        let url = URL(string: "http://34.80.65.255/api/login")!
+        let url = URL(string: "https://19a201ce.ngrok.io/api/user/register")!
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Accept")
@@ -73,26 +69,16 @@ extension SignInViewController {
             }
             if let response = response as? HTTPURLResponse {
                 print("status code: \(response.statusCode)")
-                if response.statusCode == 401 {
-                    DispatchQueue.main.async {
-                        let alertController = UIAlertController(title: "Error", message: "The account or password is unavailable.", preferredStyle: .alert)
-                        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-                        self.present(alertController, animated: true, completion: nil)
-                    }
-                    return
-                }
                 if let mimeType = response.mimeType,
                     mimeType == "application/json",
                     let data = data,
                     let dataString = String(data: data, encoding: .utf8) {
-                    print ("got data: \(dataString)")
-                    self.decodeResignData(data)
+                    print("got data: \(dataString)")
+                    let key = self.decodeBankData(data)
                     DispatchQueue.main.async {
-                        let alertController = UIAlertController(title: "Welcome Back, \(UserData.shared.name!).", message: nil, preferredStyle: .alert)
+                        let alertController = UIAlertController(title: "Success", message: "Your bank's key is \(key)", preferredStyle: .alert)
                         alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: { (_) in
-                            if let userNavi = self.storyboard?.instantiateViewController(withIdentifier: "userNavi") as? UINavigationController{
-                                self.present(userNavi, animated: true, completion: nil)
-                            }
+                            self.dismiss(animated: true, completion: nil)
                         }))
                         self.present(alertController, animated: true, completion: nil)
                     }
@@ -102,12 +88,11 @@ extension SignInViewController {
         task.resume()
     }
     
-    func decodeResignData(_ data: Data) {
-        if let decodedData = try? JSONDecoder().decode(DecodeSignIn.self, from: data) {
-            UserData.shared.name = decodedData.user.name
-            UserData.shared.role = decodedData.user.role
-            UserData.shared.token = decodedData.user.remember_token
+    func decodeBankData(_ data: Data) -> String {
+        if let decodedData = try? JSONDecoder().decode(DecodeBank.self, from: data) {
+            return decodedData.key
         }
+        return ""
     }
     
     func getEffectiveText(_ textField: UITextField) -> String {
@@ -118,15 +103,16 @@ extension SignInViewController {
         let userInfo = notification.userInfo!
         let keyboardSize = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
         let intersection = keyboardSize.intersection(self.view.frame)
-        self.view.frame.origin.y -= intersection.height - 50
+        self.view.frame.origin.y -= intersection.height - 110
     }
     
     @objc func keyboardHide(_ notification: Notification) {
         self.view.frame.origin.y = 0
     }
+    
 }
 
-extension SignInViewController: UITextFieldDelegate {
+extension BankViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
@@ -136,4 +122,5 @@ extension SignInViewController: UITextFieldDelegate {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
+    
 }

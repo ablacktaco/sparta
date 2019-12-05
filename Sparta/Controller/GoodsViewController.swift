@@ -62,7 +62,7 @@ extension GoodsViewController {
         let goods = BuyGoods(item_id: goodsList[indexPath.row].id, count: 1, key: key!)
         guard let uploadData = try? JSONEncoder().encode(goods) else { return }
             
-        let url = URL(string: "http://35.221.252.120/api/buy")!
+        let url = URL(string: "http://34.80.65.255/api/buy")!
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
