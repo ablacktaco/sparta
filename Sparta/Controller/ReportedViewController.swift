@@ -18,7 +18,11 @@ class ReportedViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationController?.title = "Report Mission"
+        keyboardHide()
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
+        navigationItem.title = "Report mission"
     }
     
     @IBOutlet var titleLabel: UILabel! {
@@ -37,7 +41,7 @@ class ReportedViewController: UIViewController {
         pickPhoto()
     }
     @IBAction func tapToReport(_ sender: UIButton) {
-        let basePostURL = "http://35.221.252.120/api/reward/\(id!)/report"
+        let basePostURL = "http://34.80.65.255/api/reward/\(id!)/report"
         let postFormData = ["reported_descript" : completeDescription.text!]
         let image = completeImage.image
         let uploadData = image!.jpegData(compressionQuality: 0.1)
@@ -57,6 +61,8 @@ extension ReportedViewController {
                 imagePicker.allowsEditing = false
                 imagePicker.sourceType = .camera
                 imagePicker.delegate = self
+                self.reportedButton.isEnabled = true
+                self.reportedButton.alpha = 1
                 
                 self.present(imagePicker, animated: true, completion: nil)
             }
@@ -68,6 +74,8 @@ extension ReportedViewController {
                 imagePicker.allowsEditing = false
                 imagePicker.sourceType = .photoLibrary
                 imagePicker.delegate = self
+                self.reportedButton.isEnabled = true
+                self.reportedButton.alpha = 1
                 
                 self.present(imagePicker, animated: true, completion: nil)
             }
@@ -154,6 +162,26 @@ extension ReportedViewController {
         
     }
     
+    func keyboardHide() {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(keyboardDismiss))
+        tap.cancelsTouchesInView = false
+        self.view.addGestureRecognizer(tap)
+    }
+    
+    @objc func keyboardDismiss() {
+        self.view.endEditing(true)
+    }
+    
+    @objc func keyboardShow(_ notification: Notification) {
+        let userInfo = notification.userInfo!
+        let keyboardSize = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+        let intersection = keyboardSize.intersection(self.view.frame)
+        self.view.frame.origin.y -= intersection.height - 100
+    }
+    
+    @objc func keyboardHide(_ notification: Notification) {
+        self.view.frame.origin.y = 0
+    }
 }
 
 extension ReportedViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {

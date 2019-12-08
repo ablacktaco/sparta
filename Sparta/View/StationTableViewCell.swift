@@ -1,14 +1,14 @@
 //
-//  GoodsTableViewCell.swift
+//  StationTableViewCell.swift
 //  Sparta
 //
-//  Created by 陳姿穎 on 2019/11/27.
+//  Created by 陳姿穎 on 2019/12/8.
 //  Copyright © 2019 陳姿穎. All rights reserved.
 //
 
 import UIKit
 
-class GoodsTableViewCell: UITableViewCell {
+class StationTableViewCell: UITableViewCell {
 
     var downloadCompletionBlock: ((_ data: Data) -> Void)?
     
@@ -21,19 +21,17 @@ class GoodsTableViewCell: UITableViewCell {
     }
 
     @IBOutlet var goodsName: UILabel!
-    @IBOutlet var goodsPrice: UILabel!
-    @IBOutlet var goodsStock: UILabel!
+    @IBOutlet var goodsState: UILabel!
     @IBOutlet var goodsImage: UIImageView!
     
 }
 
-extension GoodsTableViewCell {
+extension StationTableViewCell {
     
-    func setGoodsData(_ goodsList: [Goods.Result], indexPath: IndexPath) {
-        goodsName.text = goodsList[indexPath.row].item_name
-        goodsPrice.text = "Price: \(goodsList[indexPath.row].price)"
-        goodsStock.text = "Stock: \(goodsList[indexPath.row].stock)"
-        downloadByDownloadTask(urlString: goodsList[indexPath.row].pic , completion: { (data) in
+    func setGoodsData(_ goods: [StationGoods.Result], indexPath: IndexPath) {
+        goodsName.text = goods[indexPath.row].name
+        goodsState.text = goods[indexPath.row].status
+        downloadByDownloadTask(urlString: goods[indexPath.row].photo_url, completion: { (data) in
             self.goodsImage.image = UIImage(data: data)
         })
     }
@@ -55,9 +53,10 @@ extension GoodsTableViewCell {
             task.resume()
         }
     }
+    
 }
 
-extension GoodsTableViewCell: URLSessionDownloadDelegate {
+extension StationTableViewCell: URLSessionDownloadDelegate {
     
     func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo location: URL) {
         let data = try! Data(contentsOf: location)

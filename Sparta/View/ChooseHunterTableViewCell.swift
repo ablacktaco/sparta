@@ -35,7 +35,7 @@ extension ChooseHunterTableViewCell {
         } else {
             hunterRate.text = "Achieve rate: \(hunters[indexPath.row].achieveRate / hunters[indexPath.row].experience * 100) %"
         }
-        hunterExp.text = "Total case: \(hunters[indexPath.row].experience)"
+        hunterExp.text = "Finished case: \(hunters[indexPath.row].experience)"
     }
     
 }

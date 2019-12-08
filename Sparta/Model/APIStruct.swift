@@ -133,7 +133,7 @@ struct Goods: Codable {
         var item_name: String
         var price: Int
         var stock: Int
-        var pic: String
+        var pic: String?
     }
     
 }
@@ -152,10 +152,42 @@ struct EarnMoney: Codable {
     
 }
 
-struct ShoppingList: Codable {
+struct Belongings: Codable {
     
+    var id: Int
     var name: String
-    var img: String
-    var created_at: String
+    var img: String?
+    
+}
+
+struct SendGoods: Codable {
+    
+    var des_station_name: String
+    var weight: Int
+    var price: Int
+    
+}
+
+struct StationGoods: Codable {
+    
+    var result: [Result]
+    
+    struct Result: Codable {
+        
+        var name: String
+        var description: String
+        var weight: Double
+        var price: Int
+        var status: String
+        var photo_url: String
+        
+    }
+    
+}
+
+struct BankUserData: Codable {
+    
+    var userID: String
+    var password: String
     
 }

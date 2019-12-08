@@ -10,6 +10,9 @@ import UIKit
 
 class UserViewController: UIViewController {
     
+    var totalCase: Int?
+    var rate: Int?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -32,6 +35,8 @@ class UserViewController: UIViewController {
                     self.roleLabel.text = "Role: Mortal"
                 }
                 self.moneyLabel.text = "Property: $\(userInfo.money)"
+                self.totalCase = userInfo.experience
+                self.rate = userInfo.achieveRate
             }
         }
     }
@@ -48,8 +53,19 @@ class UserViewController: UIViewController {
     }
     
     @IBAction func tapToEarnMoney(_ sender: UIButton) {
-        if let gameVC = self.storyboard?.instantiateViewController(withIdentifier: "gameVC") as? GameViewController {
-            self.present(gameVC, animated: true, completion: nil)
+        if let gameRuleVC = self.storyboard?.instantiateViewController(withIdentifier: "gameRuleVC") as? GameRuleViewController {
+            gameRuleVC.userVC = self
+            self.present(gameRuleVC, animated: true, completion: nil)
+        }
+    }
+    @IBAction func tapToCheckUserData(_ sender: UIButton) {
+        if let userDataVC = storyboard?.instantiateViewController(withIdentifier: "userDataVC") as? UserDataViewController {
+            userDataVC.userName = UserData.shared.name
+            userDataVC.userMoney = moneyLabel.text
+            userDataVC.userRole = roleLabel.text
+            userDataVC.allCase = totalCase
+            userDataVC.acRate = rate
+            self.navigationController?.pushViewController(userDataVC, animated: true)
         }
     }
     @IBAction func tapToSignOut(_ sender: UIBarButtonItem) {

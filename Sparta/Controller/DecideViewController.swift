@@ -10,15 +10,17 @@ import UIKit
 
 class DecideViewController: UIViewController {
 
+    
     var id: Int?
     var img: String?
     var done: Int?
     var repDe: String?
     var downloadCompletionBlock: ((_ data: Data) -> Void)?
-    var mercenaryVC: OfferViewController?
+    var mercenaryVC: PostViewController?
     var missionTitle: String?
     
     var key: String?
+    var keyAlert: UIAlertController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,15 +46,18 @@ class DecideViewController: UIViewController {
     }
     @IBAction func missionSuccess(_ sender: UIButton) {
         done = 1
-        let alertController = UIAlertController(title: "Vertify", message: "Enter your bank key:", preferredStyle: .alert)
-        alertController.addTextField { (textField) in
-            textField.placeholder = "Enter your bank account's key..."
+        keyAlert = UIAlertController(title: "Vertify", message: nil, preferredStyle: .alert)
+        keyAlert!.addTextField { (textField) in
+            textField.placeholder = "Enter your bank's key"
+            textField.addTarget(self, action: #selector(self.alertTextFieldDidChange(_:)), for: .editingChanged)
         }
-        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: { (_) in
-            self.key = alertController.textFields?[0].text
+        keyAlert!.addAction(UIAlertAction(title: "OK", style: .default, handler: { (_) in
+            self.key = self.keyAlert!.textFields?[0].text
             self.finishMission()
         }))
-        self.present(alertController, animated: true, completion: nil)
+        keyAlert?.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        keyAlert?.actions[0].isEnabled = false
+        self.present(keyAlert!, animated: true, completion: nil)
         
     }
     @IBAction func missionFail(_ sender: UIButton) {
@@ -114,6 +119,12 @@ extension DecideViewController {
                         }))
                         self.present(alertController, animated: true, completion: nil)
                     }
+                } else {
+                    DispatchQueue.main.async {
+                        let alertController = UIAlertController(title: "Error", message: "Wrong key", preferredStyle: .alert)
+                        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                        self.present(alertController, animated: true, completion: nil)
+                    }
                 }
                 if let mimeType = response.mimeType,
                     mimeType == "application/json",
@@ -125,6 +136,10 @@ extension DecideViewController {
         }
         task.resume()
         
+    }
+    
+    @objc func alertTextFieldDidChange(_ sender: UITextField) {
+        keyAlert!.actions[0].isEnabled = sender.text!.count > 0
     }
     
 }

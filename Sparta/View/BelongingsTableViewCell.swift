@@ -1,5 +1,5 @@
 //
-//  GoodsTableViewCell.swift
+//  ShoppingTableViewCell.swift
 //  Sparta
 //
 //  Created by 陳姿穎 on 2019/11/27.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class GoodsTableViewCell: UITableViewCell {
+class BelongingsTableViewCell: UITableViewCell {
 
     var downloadCompletionBlock: ((_ data: Data) -> Void)?
     
@@ -20,21 +20,17 @@ class GoodsTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
 
-    @IBOutlet var goodsName: UILabel!
-    @IBOutlet var goodsPrice: UILabel!
-    @IBOutlet var goodsStock: UILabel!
-    @IBOutlet var goodsImage: UIImageView!
+    @IBOutlet var belongingsName: UILabel!
+    @IBOutlet var belongingsImage: UIImageView!
     
 }
 
-extension GoodsTableViewCell {
+extension BelongingsTableViewCell {
     
-    func setGoodsData(_ goodsList: [Goods.Result], indexPath: IndexPath) {
-        goodsName.text = goodsList[indexPath.row].item_name
-        goodsPrice.text = "Price: \(goodsList[indexPath.row].price)"
-        goodsStock.text = "Stock: \(goodsList[indexPath.row].stock)"
-        downloadByDownloadTask(urlString: goodsList[indexPath.row].pic , completion: { (data) in
-            self.goodsImage.image = UIImage(data: data)
+    func setbelongingsData(_ belongings: [Belongings], indexPath: IndexPath) {
+        belongingsName.text = belongings[indexPath.row].name
+        downloadByDownloadTask(urlString: belongings[indexPath.row].img, completion: { (data) in
+            self.belongingsImage.image = UIImage(data: data)
         })
     }
     
@@ -55,9 +51,10 @@ extension GoodsTableViewCell {
             task.resume()
         }
     }
+    
 }
 
-extension GoodsTableViewCell: URLSessionDownloadDelegate {
+extension BelongingsTableViewCell: URLSessionDownloadDelegate {
     
     func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo location: URL) {
         let data = try! Data(contentsOf: location)

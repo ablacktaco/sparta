@@ -133,6 +133,13 @@ extension MissionViewController: UITableViewDataSource, UITableViewDelegate {
         let cellIdentifier = "missionCell"
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! MissionTableViewCell
             cell.setMissionData(filterList, indexPath: indexPath)
+        
+        if filterList[indexPath.row].reported_descript == nil && filterList[indexPath.row].chosen == 1 {
+            cell.selectionStyle = .gray
+        } else {
+            cell.selectionStyle = .none
+        }
+        
         return cell
     }
     

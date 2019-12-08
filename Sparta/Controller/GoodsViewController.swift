@@ -12,9 +12,12 @@ class GoodsViewController: UIViewController {
 
     var goodsList = [Goods.Result]()
     var key: String?
+    var keyAlert: UIAlertController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        goodsTable.tableFooterView = UIView()
         
         getgoodsData { (goods) in
             self.goodsList = goods.result
@@ -30,7 +33,7 @@ extension GoodsViewController {
     
     func getgoodsData(closure: @escaping (Goods) -> Void) {
                        
-        let url = URL(string: "http://35.221.252.120/api/shop")!
+        let url = URL(string: "http://34.80.65.255/api/shop")!
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -76,6 +79,13 @@ extension GoodsViewController {
             }
             if let response = response as? HTTPURLResponse {
                 print("status code: \(response.statusCode)")
+                if response.statusCode != 200 {
+                    DispatchQueue.main.async {
+                        let alertController = UIAlertController(title: "Error", message: "Wrong key", preferredStyle: .alert)
+                        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                        self.present(alertController, animated: true, completion: nil)
+                    }
+                }
                 if let mimeType = response.mimeType,
                     mimeType == "application/json",
                     let data = data,
@@ -99,6 +109,9 @@ extension GoodsViewController {
         task.resume()
     }
     
+    @objc func alertTextFieldDidChange(_ sender: UITextField) {
+        keyAlert!.actions[0].isEnabled = sender.text!.count > 0
+    }
 }
 
 extension GoodsViewController: UITableViewDataSource, UITableViewDelegate {
@@ -112,21 +125,24 @@ extension GoodsViewController: UITableViewDataSource, UITableViewDelegate {
         let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! GoodsTableViewCell
         
         cell.setGoodsData(goodsList, indexPath: indexPath)
+        cell.selectionStyle = .gray
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let alertController = UIAlertController(title: "Vertify", message: "Enter your bank key:", preferredStyle: .alert)
-        alertController.addTextField { (textField) in
-            textField.placeholder = "Enter your bank account's key..."
+        keyAlert = UIAlertController(title: "Vertify", message: nil, preferredStyle: .alert)
+        keyAlert!.addTextField { (textField) in
+            textField.placeholder = "Enter your bank's key"
+            textField.addTarget(self, action: #selector(self.alertTextFieldDidChange(_:)), for: .editingChanged)
         }
-        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: { (_) in
-            self.key = alertController.textFields?[0].text
+        keyAlert!.addAction(UIAlertAction(title: "OK", style: .default, handler: { (_) in
+            self.key = self.keyAlert!.textFields?[0].text
             self.buyGoods(indexPath)
         }))
-        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        self.present(alertController, animated: true, completion: nil)
+        keyAlert?.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        keyAlert?.actions[0].isEnabled = false
+        self.present(keyAlert!, animated: true, completion: nil)
     }
     
 }

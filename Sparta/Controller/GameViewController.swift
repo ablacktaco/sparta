@@ -26,6 +26,8 @@ class GameViewController: UIViewController {
     var oldFishTimer: Timer?
     var sproutsTimer: Timer?
     
+    var userVC: UserViewController?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -170,7 +172,7 @@ extension GameViewController {
         let money = EarnMoney(earned: point)
         guard let uploadData = try? JSONEncoder().encode(money) else { return }
             
-        let url = URL(string: "http://35.221.252.120/api/earn")!
+        let url = URL(string: "http://34.80.65.255/api/earn")!
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -190,7 +192,7 @@ extension GameViewController {
                     let dataString = String(data: data, encoding: .utf8) {
                     print ("got data: \(dataString)")
                     DispatchQueue.main.async {
-                        self.dismiss(animated: true, completion: nil)
+                        self.userVC!.dismiss(animated: true, completion: nil)
                     }
                 }
             }
@@ -204,7 +206,7 @@ extension GameViewController {
             if self.point != 0 {
                 self.earnMoney()
             } else {
-                self.dismiss(animated: true, completion: nil)
+                self.userVC!.dismiss(animated: true, completion: nil)
             }
         }))
         self.present(alertController, animated: true, completion: nil)
@@ -213,7 +215,7 @@ extension GameViewController {
     func shotSproutsAlert() {
         let alertController = UIAlertController(title: "Do NOT shot sprouts 👿", message: "You earned $\(point)", preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "QQ", style: .default, handler: { (_) in
-            self.dismiss(animated: true, completion: nil)
+            self.userVC!.dismiss(animated: true, completion: nil)
         }))
         self.present(alertController, animated: true, completion: nil)
     }
@@ -224,7 +226,7 @@ extension GameViewController {
             if self.point != 0 {
                 self.earnMoney()
             } else {
-                self.dismiss(animated: true, completion: nil)
+                self.userVC!.dismiss(animated: true, completion: nil)
             }
         }))
         self.present(alertController, animated: true, completion: nil)

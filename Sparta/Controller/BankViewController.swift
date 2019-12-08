@@ -56,7 +56,7 @@ extension BankViewController {
         let registerData = Bank(name: getEffectiveText(name), account: getEffectiveText(email), password: getEffectiveText(password))
         guard let uploadData = try? JSONEncoder().encode(registerData) else { return }
 
-        let url = URL(string: "https://19a201ce.ngrok.io/api/user/register")!
+        let url = URL(string: "https://bboa14171205.nctu.me/api/user/register")!
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Accept")

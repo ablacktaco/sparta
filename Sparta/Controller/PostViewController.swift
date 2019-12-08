@@ -134,20 +134,34 @@ extension PostViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cellIdentifier = "mortalCell"
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! PostTableViewCell
-            cell.setRewardData(filterList, indexPath: indexPath)
+        
+        cell.setRewardData(filterList, indexPath: indexPath)
+        
+        if filterList[indexPath.row].chosen == 0 {
+            cell.selectionStyle = .gray
+        } else if filterList[indexPath.row].reported_descript != nil && filterList[indexPath.row].done == nil {
+            cell.selectionStyle = .gray
+        } else {
+            cell.selectionStyle = .none
+        }
+        
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if filterList[indexPath.row].chosen == 0 {
             if let chooseVC = storyboard?.instantiateViewController(withIdentifier: "chooseVC") as? ChooseHunterViewController {
+                chooseVC.mercenaryVC = self
                 chooseVC.hunters = filterList[indexPath.row].hunters
                 chooseVC.id = filterList[indexPath.row].id
                 self.navigationController?.pushViewController(chooseVC, animated: true)
             }
         } else if filterList[indexPath.row].reported_descript != nil && filterList[indexPath.row].done == nil {
             if let decideVC = storyboard?.instantiateViewController(withIdentifier: "decideVC") as? DecideViewController {
+                decideVC.mercenaryVC = self
                 decideVC.id = filterList[indexPath.row].id
+                decideVC.missionTitle = filterList[indexPath.row].name
+                decideVC.img = filterList[indexPath.row].img
                 decideVC.repDe = filterList[indexPath.row].reported_descript
                 self.navigationController?.pushViewController(decideVC, animated: true)
             }

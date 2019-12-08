@@ -13,10 +13,13 @@ class ChooseHunterViewController: UIViewController {
     var id: Int?
     var hunters = [Reward.Hunter]()
     var index: Int?
-    var mercenaryVC: OfferViewController?
+    var mercenaryVC: PostViewController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        assignedButton.alpha = 0.2
+        assignedButton.isEnabled = false
         
         navigationItem.title = "Asigned hunter"
         hunterTable.tableFooterView = UIView()
@@ -97,10 +100,14 @@ extension ChooseHunterViewController: UITableViewDataSource, UITableViewDelegate
         let cellIdentifier = "hunterCell"
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! ChooseHunterTableViewCell
         cell.setHunterData(hunters, indexPath: indexPath)
+        cell.selectionStyle = .gray
+        
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        assignedButton.isEnabled = true
+        assignedButton.alpha = 1
         index = indexPath.row
     }
     

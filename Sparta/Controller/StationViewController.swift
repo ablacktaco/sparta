@@ -1,37 +1,44 @@
 //
-//  ShoppingViewController.swift
+//  StationViewController.swift
 //  Sparta
 //
-//  Created by 陳姿穎 on 2019/11/27.
+//  Created by 陳姿穎 on 2019/12/8.
 //  Copyright © 2019 陳姿穎. All rights reserved.
 //
 
 import UIKit
 
-class ShoppingViewController: UIViewController {
+class StationViewController: UIViewController {
 
-    var shoppingList = [ShoppingList]()
+    var stationGoods = [StationGoods.Result]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        getShopList { (shoppingList) in
-            self.shoppingList = shoppingList
+        let backButton = UIBarButtonItem(title: "Back", style: .plain, target: self, action: nil)
+        navigationItem.backBarButtonItem = backButton
+        navigationController?.navigationBar.tintColor = UIColor(red: 1/255, green: 194/255, blue: 176/255, alpha: 1)
+        
+        stationGoodsTable.tableFooterView = UIView()
+        
+        getstationGoods { (stationGoods) in
+            self.stationGoods = stationGoods.result
             DispatchQueue.main.async {
-                self.shoppingTable.reloadData()
+                self.stationGoodsTable.reloadData()
             }
         }
     }
     
-    @IBOutlet var shoppingTable: UITableView!
+    @IBOutlet var stationGoodsTable: UITableView!
     
+
 }
 
-extension ShoppingViewController {
+extension StationViewController {
     
-    func getShopList(closure: @escaping ([ShoppingList]) -> Void) {
-        
-        let url = URL(string: "http://34.80.65.255/api/bought")!
+    func getstationGoods(closure: @escaping (StationGoods) -> Void) {
+                       
+        let url = URL(string: "http://34.80.65.255/api/tasklist/3")!
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -50,8 +57,8 @@ extension ShoppingViewController {
                     let data = data,
                     let dataString = String(data: data, encoding: .utf8) {
                     print ("got data: \(dataString)")
-                    if let shoppingList = try? JSONDecoder().decode([ShoppingList].self, from: data) {
-                        closure(shoppingList)
+                    if let stationGoods = try? JSONDecoder().decode(StationGoods.self, from: data) {
+                        closure(stationGoods)
                     }
                 }
             }
@@ -61,19 +68,20 @@ extension ShoppingViewController {
     
 }
 
-extension ShoppingViewController: UITableViewDataSource, UITableViewDelegate {
-    
+extension StationViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return shoppingList.count
+        return stationGoods.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let identifier = "shoppingCell"
-        let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! ShoppingTableViewCell
+        let identifier = "stationCell"
+        let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! StationTableViewCell
         
-        cell.setShoppingData(shoppingList, indexPath: indexPath)
+        cell.setGoodsData(stationGoods, indexPath: indexPath)
+        cell.selectionStyle = .none
         
         return cell
     }
+    
     
 }
