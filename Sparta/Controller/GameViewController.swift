@@ -60,22 +60,22 @@ class GameViewController: UIViewController {
     
     @IBAction func upCenter(_ sender: UIButton) {
         UIView.animate(withDuration: 0.1) {
-            self.center.center.y -= 10
+            self.center.center.y -= 3
         }
     }
     @IBAction func leftCenter(_ sender: UIButton) {
         UIView.animate(withDuration: 0.1) {
-            self.center.center.x -= 10
+            self.center.center.x -= 3
         }
     }
     @IBAction func rightCenter(_ sender: UIButton) {
         UIView.animate(withDuration: 0.1) {
-            self.center.center.x += 10
+            self.center.center.x += 3
         }
     }
     @IBAction func downCenter(_ sender: UIButton) {
         UIView.animate(withDuration: 0.1) {
-            self.center.center.y += 10
+            self.center.center.y += 3
         }
     }
     
@@ -236,7 +236,6 @@ extension GameViewController {
         
         let rect = gameView.frame
         
-        //Jes
         jesTimer = Timer.scheduledTimer(withTimeInterval: 1.5, repeats: true) { (timer) in
             UIView.animate(withDuration: 0.5) {
                 self.jes.isHidden = Bool.random()
@@ -244,36 +243,31 @@ extension GameViewController {
             }
         }
         
-        //Charleen
-        charleenTimer = Timer.scheduledTimer(withTimeInterval: 2.2, repeats: true) { (timer) in
+        charleenTimer = Timer.scheduledTimer(withTimeInterval: 1.7, repeats: true) { (timer) in
             UIView.animate(withDuration: 0.2) {
                 self.charleen.isHidden = Bool.random()
                 self.charleen.center = CGPoint(x: CGFloat.random(in: 0...rect.width), y: CGFloat.random(in: 0...rect.height))
             }
         }
         
-        //Louis
-        louisTimer = Timer.scheduledTimer(withTimeInterval: 2.5, repeats: true) { (timer) in
+        louisTimer = Timer.scheduledTimer(withTimeInterval: 2, repeats: true) { (timer) in
             UIView.animate(withDuration: 0.5) {
                 self.louis.center = CGPoint(x: CGFloat.random(in: 0...rect.width), y: CGFloat.random(in: 0...rect.height))
             }
         }
         
-        //WangWang
         wangwangTimer = Timer.scheduledTimer(withTimeInterval: 4, repeats: true) { (timer) in
             UIView.animate(withDuration: 4) {
                 self.wangwang.center = CGPoint(x: CGFloat.random(in: 0...rect.width), y: CGFloat.random(in: 0...rect.height))
             }
         }
         
-        //OldFish
-        oldFishTimer = Timer.scheduledTimer(withTimeInterval: 3.2, repeats: true) { (timer) in
+        oldFishTimer = Timer.scheduledTimer(withTimeInterval: 2.2, repeats: true) { (timer) in
             UIView.animate(withDuration: 0.2) {
                 self.oldFish.center = CGPoint(x: CGFloat.random(in: 0...rect.width), y: CGFloat.random(in: 0...rect.height))
             }
         }
         
-        //Sprouts
         sproutsTimer = Timer.scheduledTimer(withTimeInterval: 1.2, repeats: true) { (timer) in
             UIView.animate(withDuration: 0.2) {
                 self.sprouts.isHidden = Bool.random()
@@ -293,4 +287,34 @@ extension GameViewController {
         sproutsTimer?.invalidate()
     }
 
+    @IBAction func handleUpLongPress(_ sender: UILongPressGestureRecognizer) {
+        
+        sender.addTarget(self, action: #selector(upCenter(_:)))
+        
+    }
+    
+    @IBAction func handleDownLongPress(_ sender: UILongPressGestureRecognizer) {
+        
+        sender.addTarget(self, action: #selector(downCenter(_:)))
+        
+    }
+    
+    @IBAction func handleLeftLongPress(_ sender: UILongPressGestureRecognizer) {
+        
+        sender.addTarget(self, action: #selector(leftCenter(_:)))
+        
+    }
+    
+    @IBAction func handleRightLongPress(_ sender: UILongPressGestureRecognizer) {
+        
+        sender.addTarget(self, action: #selector(rightCenter(_:)))
+        
+    }
+    
+    @IBAction func handleShotLongPress(_ sender: UILongPressGestureRecognizer) {
+        
+        sender.addTarget(self, action: #selector(tapToShot(_:)))
+        
+    }
+    
 }
