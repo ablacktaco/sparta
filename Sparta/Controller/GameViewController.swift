@@ -58,86 +58,6 @@ class GameViewController: UIViewController {
     
     @IBOutlet var center: UIImageView!
     
-    @IBAction func upCenter(_ sender: UIButton) {
-        UIView.animate(withDuration: 0.1) {
-            self.center.center.y -= 3
-        }
-    }
-    @IBAction func leftCenter(_ sender: UIButton) {
-        UIView.animate(withDuration: 0.1) {
-            self.center.center.x -= 3
-        }
-    }
-    @IBAction func rightCenter(_ sender: UIButton) {
-        UIView.animate(withDuration: 0.1) {
-            self.center.center.x += 3
-        }
-    }
-    @IBAction func downCenter(_ sender: UIButton) {
-        UIView.animate(withDuration: 0.1) {
-            self.center.center.y += 3
-        }
-    }
-    
-    @IBAction func tapToShot(_ sender: UIButton) {
-        
-        let url = Bundle.main.url(forResource: "gun", withExtension: ".mp3")
-        do {
-            spartaPlayer = try AVAudioPlayer(contentsOf: url!)
-            spartaPlayer.play()
-        } catch {
-            print("Error:", error.localizedDescription)
-        }
-        
-        bulletCount -= 1
-        bulletCountLabel.text = "剩餘子彈: \(bulletCount) 顆"
-        
-        if sprouts.frame.contains(center.center) {
-            if !sprouts.isHidden {
-                timerInvalidate()
-                countDownTimeLabel.text = "GAME OVER"
-                point = 0
-                pointLabel.text = "得分: \(point) 分"
-                shotSproutsAlert()
-                return
-            }
-        } else if oldFish.frame.contains(center.center) {
-            if !oldFish.isHidden {
-                point += 10
-                pointLabel.text = "得分: \(point) 分"
-            }
-        } else if wangwang.frame.contains(center.center) {
-            if !wangwang.isHidden {
-                point -= 50
-                if point < 0 {
-                    point = 0
-                }
-                pointLabel.text = "得分: \(point) 分"
-            }
-        } else if louis.frame.contains(center.center) {
-            if !louis.isHidden {
-                point += 30
-                pointLabel.text = "得分: \(point) 分"
-            }
-        } else if charleen.frame.contains(center.center) {
-            if !charleen.isHidden {
-                point += 50
-                pointLabel.text = "得分: \(point) 分"
-            }
-        } else if jes.frame.contains(center.center) {
-            if !jes.isHidden {
-                point += 100
-                pointLabel.text = "得分: \(point) 分"
-            }
-        }
-        
-        if bulletCount == 0 {
-            timerInvalidate()
-            outOfBulletAlert()
-        }
-        
-    }
-    
 }
 
 extension GameViewController {
@@ -176,7 +96,7 @@ extension GameViewController {
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.setValue("keep-alive", forHTTPHeaderField: "connection")
+//        request.setValue("keep-alive", forHTTPHeaderField: "connection")
         request.setValue(UserData.shared.token, forHTTPHeaderField: "remember_token")
                             
         let task = URLSession.shared.uploadTask(with: request, from: uploadData) { (data, response, error) in
@@ -289,31 +209,92 @@ extension GameViewController {
 
     @IBAction func handleUpLongPress(_ sender: UILongPressGestureRecognizer) {
         
-        sender.addTarget(self, action: #selector(upCenter(_:)))
+        UIView.animate(withDuration: 0.1) {
+            self.center.center.y -= 3
+        }
         
     }
     
     @IBAction func handleDownLongPress(_ sender: UILongPressGestureRecognizer) {
         
-        sender.addTarget(self, action: #selector(downCenter(_:)))
+        UIView.animate(withDuration: 0.1) {
+            self.center.center.y += 3
+        }
         
     }
     
     @IBAction func handleLeftLongPress(_ sender: UILongPressGestureRecognizer) {
         
-        sender.addTarget(self, action: #selector(leftCenter(_:)))
+        UIView.animate(withDuration: 0.1) {
+            self.center.center.x -= 3
+        }
         
     }
     
     @IBAction func handleRightLongPress(_ sender: UILongPressGestureRecognizer) {
         
-        sender.addTarget(self, action: #selector(rightCenter(_:)))
+        UIView.animate(withDuration: 0.1) {
+            self.center.center.x += 3
+        }
         
     }
     
-    @IBAction func handleShotLongPress(_ sender: UILongPressGestureRecognizer) {
+    @IBAction func tapToShot(_ sender: UIButton) {
         
-        sender.addTarget(self, action: #selector(tapToShot(_:)))
+        let url = Bundle.main.url(forResource: "gun", withExtension: ".mp3")
+        do {
+            spartaPlayer = try AVAudioPlayer(contentsOf: url!)
+            spartaPlayer.play()
+        } catch {
+            print("Error:", error.localizedDescription)
+        }
+        
+        bulletCount -= 1
+        bulletCountLabel.text = "剩餘子彈: \(bulletCount) 顆"
+        
+        if sprouts.frame.contains(center.center) {
+            if !sprouts.isHidden {
+                timerInvalidate()
+                countDownTimeLabel.text = "GAME OVER"
+                point = 0
+                pointLabel.text = "得分: \(point) 分"
+                shotSproutsAlert()
+                return
+            }
+        } else if oldFish.frame.contains(center.center) {
+            if !oldFish.isHidden {
+                point += 10
+                pointLabel.text = "得分: \(point) 分"
+            }
+        } else if wangwang.frame.contains(center.center) {
+            if !wangwang.isHidden {
+                point -= 50
+                if point < 0 {
+                    point = 0
+                }
+                pointLabel.text = "得分: \(point) 分"
+            }
+        } else if louis.frame.contains(center.center) {
+            if !louis.isHidden {
+                point += 30
+                pointLabel.text = "得分: \(point) 分"
+            }
+        } else if charleen.frame.contains(center.center) {
+            if !charleen.isHidden {
+                point += 50
+                pointLabel.text = "得分: \(point) 分"
+            }
+        } else if jes.frame.contains(center.center) {
+            if !jes.isHidden {
+                point += 100
+                pointLabel.text = "得分: \(point) 分"
+            }
+        }
+        
+        if bulletCount == 0 {
+            timerInvalidate()
+            outOfBulletAlert()
+        }
         
     }
     

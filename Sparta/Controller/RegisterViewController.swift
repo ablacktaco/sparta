@@ -19,6 +19,7 @@ class RegisterViewController: UIViewController {
         bankAccount.addTarget(self, action: #selector(checkContent), for: .editingChanged)
         
         password.isSecureTextEntry = true
+        bankAccount.keyboardType = .emailAddress
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)

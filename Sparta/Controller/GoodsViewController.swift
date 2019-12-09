@@ -134,6 +134,7 @@ extension GoodsViewController: UITableViewDataSource, UITableViewDelegate {
         keyAlert = UIAlertController(title: "Vertify", message: nil, preferredStyle: .alert)
         keyAlert!.addTextField { (textField) in
             textField.placeholder = "Enter your bank's key"
+            textField.isSecureTextEntry = true
             textField.addTarget(self, action: #selector(self.alertTextFieldDidChange(_:)), for: .editingChanged)
         }
         keyAlert!.addAction(UIAlertAction(title: "OK", style: .default, handler: { (_) in

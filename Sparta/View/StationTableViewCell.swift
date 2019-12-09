@@ -20,9 +20,10 @@ class StationTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
 
-    @IBOutlet var goodsName: UILabel!
-    @IBOutlet var goodsState: UILabel!
     @IBOutlet var goodsImage: UIImageView!
+    @IBOutlet var goodsName: UILabel!
+    @IBOutlet var goodsDestination: UILabel!
+    @IBOutlet var goodsLocation: UILabel!
     
 }
 
@@ -30,10 +31,29 @@ extension StationTableViewCell {
     
     func setGoodsData(_ goods: [StationGoods.Result], indexPath: IndexPath) {
         goodsName.text = goods[indexPath.row].name
-        goodsState.text = goods[indexPath.row].status
         downloadByDownloadTask(urlString: goods[indexPath.row].photo_url, completion: { (data) in
             self.goodsImage.image = UIImage(data: data)
         })
+    }
+    
+    func setLocation(_ goods: [StationGoods.Result], indexPath: IndexPath) {
+        switch goods[indexPath.row].now_station_id {
+        case 1: goodsLocation.text = "Now location: Athens"
+        case 2: goodsLocation.text = "Now location: Phokis"
+        case 3: goodsLocation.text = "Now location: Arkadia"
+        case 4: goodsLocation.text = "Now location: Sparta"
+        default: break
+        }
+    }
+    
+    func setDestination(_ goods: [StationGoods.Result], indexPath: IndexPath) {
+        switch goods[indexPath.row].des_station_id {
+        case 1: goodsDestination.text = "Destination: Athens"
+        case 2: goodsDestination.text = "Destination: Phokis"
+        case 3: goodsDestination.text = "Destination: Arkadia"
+        case 4: goodsDestination.text = "Destination: Sparta"
+        default: break
+        }
     }
     
     func downloadByDownloadTask(urlString: String?, completion: @escaping (Data) -> Void){

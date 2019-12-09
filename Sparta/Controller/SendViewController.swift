@@ -20,7 +20,7 @@ class SendViewController: UIViewController {
         weightText.addTarget(self, action: #selector(checkContent), for: .editingChanged)
         freightText.addTarget(self, action: #selector(checkContent), for: .editingChanged)
         
-        weightText.keyboardType = .numberPad
+        weightText.keyboardType = .decimalPad
         freightText.keyboardType = .numberPad
         
         belongingsTable.tableFooterView = UIView()
@@ -100,7 +100,7 @@ extension SendViewController {
         default: break
         }
         
-        let sendingGoods = SendGoods(des_station_name: destination!, weight: Int(getEffectiveText(weightText))!, price: Int(getEffectiveText(freightText))!)
+        let sendingGoods = SendGoods(des_station_name: destination!, weight: Double(getEffectiveText(weightText))!, price: Int(getEffectiveText(freightText))!)
         guard let uploadData = try? JSONEncoder().encode(sendingGoods) else { return }
 
         let url = URL(string: "http://34.80.65.255/api/goods/\(index!)")!
@@ -125,7 +125,7 @@ extension SendViewController {
                     DispatchQueue.main.async {
                         let alertController = UIAlertController(title: "Success", message: nil, preferredStyle: .alert)
                         alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: { (_) in
-                            self.dismiss(animated: true, completion: nil)
+                            self.navigationController?.popViewController(animated: true)
                         }))
                         self.present(alertController, animated: true, completion: nil)
                     }

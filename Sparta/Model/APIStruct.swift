@@ -45,6 +45,8 @@ struct DecodeSignIn: Codable {
 }
 
 struct UserInfo: Codable {
+    
+    var avatar: String?
     var id: Int
     var achieveRate: Int?
     var experience: Int?
@@ -163,7 +165,7 @@ struct Belongings: Codable {
 struct SendGoods: Codable {
     
     var des_station_name: String
-    var weight: Int
+    var weight: Double
     var price: Int
     
 }
@@ -175,11 +177,10 @@ struct StationGoods: Codable {
     struct Result: Codable {
         
         var name: String
-        var description: String
-        var weight: Double
-        var price: Int
+        var des_station_id: Int
+        var now_station_id: Int
         var status: String
-        var photo_url: String
+        var photo_url: String?
         
     }
     

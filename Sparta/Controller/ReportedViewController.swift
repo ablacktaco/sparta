@@ -61,8 +61,6 @@ extension ReportedViewController {
                 imagePicker.allowsEditing = false
                 imagePicker.sourceType = .camera
                 imagePicker.delegate = self
-                self.reportedButton.isEnabled = true
-                self.reportedButton.alpha = 1
                 
                 self.present(imagePicker, animated: true, completion: nil)
             }
@@ -74,8 +72,6 @@ extension ReportedViewController {
                 imagePicker.allowsEditing = false
                 imagePicker.sourceType = .photoLibrary
                 imagePicker.delegate = self
-                self.reportedButton.isEnabled = true
-                self.reportedButton.alpha = 1
                 
                 self.present(imagePicker, animated: true, completion: nil)
             }
@@ -191,8 +187,9 @@ extension ReportedViewController: UIImagePickerControllerDelegate, UINavigationC
         if let selectedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             completeImage.image = selectedImage
             pickPhotoButton.setTitle("", for: .normal)
-            completeImage.contentMode = .scaleAspectFill
-            completeImage.clipsToBounds = true
+            completeImage.contentMode = .scaleAspectFit
+            reportedButton.isEnabled = true
+            reportedButton.alpha = 1
         }
         
         dismiss(animated: true, completion: nil)
