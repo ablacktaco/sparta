@@ -79,7 +79,7 @@ extension BankViewController {
                     DispatchQueue.main.async {
                         let alertController = UIAlertController(title: "Success", message: "Your bank's key is \(key)", preferredStyle: .alert)
                         alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: { (_) in
-                            self.dismiss(animated: true, completion: nil)
+                            self.navigationController?.popViewController(animated: true)
                         }))
                         self.present(alertController, animated: true, completion: nil)
                     }
@@ -89,11 +89,11 @@ extension BankViewController {
         task.resume()
     }
     
-    func decodeBankData(_ data: Data) -> String {
+    func decodeBankData(_ data: Data) -> Int {
         if let decodedData = try? JSONDecoder().decode(DecodeBank.self, from: data) {
             return decodedData.key
         }
-        return ""
+        return 0
     }
     
     func getEffectiveText(_ textField: UITextField) -> String {

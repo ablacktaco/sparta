@@ -38,10 +38,10 @@ extension StationTableViewCell {
     
     func setLocation(_ goods: [StationGoods.Result], indexPath: IndexPath) {
         switch goods[indexPath.row].now_station_id {
-        case 1: goodsLocation.text = "Now location: Athens"
-        case 2: goodsLocation.text = "Now location: Phokis"
-        case 3: goodsLocation.text = "Now location: Arkadia"
-        case 4: goodsLocation.text = "Now location: Sparta"
+        case 1: goodsLocation.text = "Location: Athens"
+        case 2: goodsLocation.text = "Location: Phokis - Athens"
+        case 3: goodsLocation.text = "Location: Arkadia - Phokis"
+        case 4: goodsLocation.text = "Location: Sparta - Arkadia"
         default: break
         }
     }

@@ -126,7 +126,7 @@ extension QualificationViewController {
         let alertController = UIAlertController(title: "Fail", message: "Where does your self-confidence come from?", preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "Register in a mortal", style: .default, handler: { (_) in
             self.regiVC?.role.selectedSegmentIndex = 0
-            self.dismiss(animated: true) {
+            self.regiVC?.dismiss(animated: true) {
                 self.regiVC?.postRegisterData()
             }
         }))

@@ -131,19 +131,25 @@ extension GoodsViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        keyAlert = UIAlertController(title: "Vertify", message: nil, preferredStyle: .alert)
-        keyAlert!.addTextField { (textField) in
-            textField.placeholder = "Enter your bank's key"
-            textField.isSecureTextEntry = true
-            textField.addTarget(self, action: #selector(self.alertTextFieldDidChange(_:)), for: .editingChanged)
+        if goodsList[indexPath.row].stock == 0 {
+            let alertController = UIAlertController(title: "Error", message: "The goods is out of stock.", preferredStyle: .alert)
+            alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            present(alertController, animated: true, completion: nil)
+        } else {
+            keyAlert = UIAlertController(title: "Vertify", message: nil, preferredStyle: .alert)
+            keyAlert!.addTextField { (textField) in
+                textField.placeholder = "Enter your bank's key"
+                textField.isSecureTextEntry = true
+                textField.addTarget(self, action: #selector(self.alertTextFieldDidChange(_:)), for: .editingChanged)
+            }
+            keyAlert!.addAction(UIAlertAction(title: "OK", style: .default, handler: { (_) in
+                self.key = self.keyAlert!.textFields?[0].text
+                self.buyGoods(indexPath)
+            }))
+            keyAlert?.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+            keyAlert?.actions[0].isEnabled = false
+            self.present(keyAlert!, animated: true, completion: nil)
         }
-        keyAlert!.addAction(UIAlertAction(title: "OK", style: .default, handler: { (_) in
-            self.key = self.keyAlert!.textFields?[0].text
-            self.buyGoods(indexPath)
-        }))
-        keyAlert?.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        keyAlert?.actions[0].isEnabled = false
-        self.present(keyAlert!, animated: true, completion: nil)
     }
     
 }

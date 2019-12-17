@@ -177,11 +177,11 @@ extension UserDataViewController {
         task.resume()
     }
     
-    func decodeBankData(_ data: Data) -> String {
+    func decodeBankData(_ data: Data) -> Int {
         if let decodedData = try? JSONDecoder().decode(DecodeBank.self, from: data) {
             return decodedData.key
         }
-        return ""
+        return 0
     }
     
     func getEffectiveText(_ textField: UITextField) -> String {

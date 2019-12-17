@@ -13,6 +13,7 @@ class SendViewController: UIViewController {
     var belongings = [Belongings]()
     var index: Int?
     var destination: String?
+    var preparedVC: PreparedStationViewController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,6 +40,7 @@ class SendViewController: UIViewController {
     @IBOutlet var countrySeg: UISegmentedControl!
     @IBOutlet var weightText: UITextField!
     @IBOutlet var freightText: UITextField!
+    @IBOutlet var loadingData: UIActivityIndicatorView!
     @IBOutlet var sendingButton: UIButton! {
         didSet { setViewBorder(view: sendingButton, configSetting: .mainButton) }
     }
@@ -125,7 +127,16 @@ extension SendViewController {
                     DispatchQueue.main.async {
                         let alertController = UIAlertController(title: "Success", message: nil, preferredStyle: .alert)
                         alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: { (_) in
-                            self.navigationController?.popViewController(animated: true)
+                            DispatchQueue.main.async {
+                                self.loadingData.isHidden = false
+                                self.preparedVC?.getStationGoods { (stationGoods) in
+                                    self.preparedVC?.preparedStationGoods = stationGoods.result.filter { ($0.status == "準備中") }
+                                    DispatchQueue.main.async {
+                                        self.preparedVC?.preparedStationGoodsTable.reloadData()
+                                        self.navigationController?.popViewController(animated: true)
+                                    }
+                                }
+                            }
                         }))
                         self.present(alertController, animated: true, completion: nil)
                     }

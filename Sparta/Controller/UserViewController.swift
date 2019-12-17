@@ -70,35 +70,6 @@ class UserViewController: UIViewController {
             self.present(gameRuleVC, animated: true, completion: nil)
         }
     }
-    @IBAction func tapToStation(_ sender: UIButton) {
-        for button in userButtons {
-            button.isEnabled = false
-            button.alpha = 0.2
-        }
-        getStationGoods { (stationGoods) in
-            DispatchQueue.main.async {
-                if let stationTabBar = self.storyboard?.instantiateViewController(withIdentifier: "stationTabBar") as? StationTabBarViewController {
-                    if let preparedVC = stationTabBar.viewControllers![0] as? PreparedStationViewController {
-                        preparedVC.preparedStationGoods = stationGoods.result.filter { ($0.status == "準備中") }
-                    }
-                    if let sendingVC = stationTabBar.viewControllers![1] as? SendingStationViewController {
-                        sendingVC.sendingStationGoods = stationGoods.result.filter { ($0.status == "運送中") }
-                    }
-                    if let cancelVC = stationTabBar.viewControllers![2] as? CancelStationViewController {
-                        cancelVC.cancelStationGoods = stationGoods.result.filter { ($0.status == "已註銷") }
-                    }
-                    if let arrivedVC = stationTabBar.viewControllers![3] as? ArrivedStationViewController {
-                        arrivedVC.arrivedStationGoods = stationGoods.result.filter { ($0.status == "已抵達") }
-                    }
-                    for button in self.userButtons {
-                        button.isEnabled = true
-                        button.alpha = 1
-                    }
-                    self.navigationController?.pushViewController(stationTabBar, animated: true)
-                }
-            }
-        }
-    }
     @IBAction func tapToCheckUserData(_ sender: UIButton) {
         if let userDataVC = storyboard?.instantiateViewController(withIdentifier: "userDataVC") as? UserDataViewController {
             userDataVC.image = image
@@ -181,36 +152,6 @@ extension UserViewController {
             
             task.resume()
         }
-    }
-    
-    func getStationGoods(closure: @escaping (StationGoods) -> Void) {
-                       
-        let url = URL(string: "http://34.80.65.255/api/goodlist/4")!
-        var request = URLRequest(url: url)
-        request.httpMethod = "GET"
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.setValue("keep-alive", forHTTPHeaderField: "connection")
-        request.setValue(UserData.shared.token, forHTTPHeaderField: "remember_token")
-                        
-        let task = URLSession.shared.uploadTask(with: request, fromFile: url) { (data, response, error) in
-            if let error = error {
-                print ("error: \(error)")
-                return
-            }
-            if let response = response as? HTTPURLResponse {
-                print("status code: \(response.statusCode)")
-                if let mimeType = response.mimeType,
-                    mimeType == "application/json",
-                    let data = data,
-                    let dataString = String(data: data, encoding: .utf8) {
-                    print ("got data: \(dataString)")
-                    if let stationGoods = try? JSONDecoder().decode(StationGoods.self, from: data) {
-                        closure(stationGoods)
-                    }
-                }
-            }
-        }
-        task.resume()
     }
 }
 

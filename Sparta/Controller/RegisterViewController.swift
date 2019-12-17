@@ -85,9 +85,11 @@ extension RegisterViewController {
             if let response = response as? HTTPURLResponse {
                 print("status code: \(response.statusCode)")
                 if response.statusCode == 416 {
-                    let alertController = UIAlertController(title: "", message: "The name or account has already been taken.", preferredStyle: .alert)
-                    alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-                    self.present(alertController, animated: true, completion: nil)
+                    DispatchQueue.main.async {
+                        let alertController = UIAlertController(title: "", message: "The name or account has already been taken.", preferredStyle: .alert)
+                        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                        self.present(alertController, animated: true, completion: nil)
+                    }
                     return
                 }
                 if let mimeType = response.mimeType,

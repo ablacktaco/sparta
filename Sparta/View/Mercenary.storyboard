@@ -201,8 +201,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" spacing="50" translatesAutoresizingMaskIntoConstraints="NO" id="rAN-MS-IvR">
-                                <rect key="frame" x="62.666666666666657" y="114" width="249.99999999999997" height="584"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="rAN-MS-IvR">
+                                <rect key="frame" x="62.666666666666657" y="94" width="249.99999999999997" height="624"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3sG-KX-IzO">
                                         <rect key="frame" x="84.666666666666686" y="0.0" width="80.333333333333314" height="40.666666666666664"/>
@@ -211,7 +211,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="1EJ-vb-Ocg">
-                                        <rect key="frame" x="0.0" y="102.33333333333337" width="250" height="370"/>
+                                        <rect key="frame" x="0.0" y="122.33333333333337" width="250" height="370"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5dB-Lo-qhR">
                                                 <rect key="frame" x="0.0" y="0.0" width="250" height="250"/>
@@ -254,7 +254,7 @@
                                         </subviews>
                                     </stackView>
                                     <button opaque="NO" alpha="0.20000000000000001" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1vj-Ct-tYQ">
-                                        <rect key="frame" x="0.0" y="534" width="250" height="50"/>
+                                        <rect key="frame" x="0.0" y="574" width="250" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="Gfw-Ap-ze5"/>
                                         </constraints>
@@ -276,9 +276,9 @@
                         <color key="backgroundColor" red="0.26051741839999998" green="0.2605243921" blue="0.260520637" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="rAN-MS-IvR" firstAttribute="centerY" secondItem="X9T-mE-wqA" secondAttribute="centerY" id="4ER-m2-go3"/>
-                            <constraint firstItem="rAN-MS-IvR" firstAttribute="top" relation="lessThanOrEqual" secondItem="zrS-Nj-ZGo" secondAttribute="top" constant="70" id="bWT-OC-w7A"/>
+                            <constraint firstItem="rAN-MS-IvR" firstAttribute="top" relation="lessThanOrEqual" secondItem="zrS-Nj-ZGo" secondAttribute="top" constant="50" id="bWT-OC-w7A"/>
                             <constraint firstItem="rAN-MS-IvR" firstAttribute="centerX" secondItem="X9T-mE-wqA" secondAttribute="centerX" id="d3T-sE-bDl"/>
-                            <constraint firstItem="rAN-MS-IvR" firstAttribute="top" relation="greaterThanOrEqual" secondItem="zrS-Nj-ZGo" secondAttribute="top" constant="50" id="yZ5-0K-oGB"/>
+                            <constraint firstItem="rAN-MS-IvR" firstAttribute="top" relation="greaterThanOrEqual" secondItem="zrS-Nj-ZGo" secondAttribute="top" constant="20" id="yZ5-0K-oGB"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="zrS-Nj-ZGo"/>
                     </view>

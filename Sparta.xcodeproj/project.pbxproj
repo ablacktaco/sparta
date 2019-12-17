@@ -1,0 +1,543 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		B3014BB3238BC11000048AD2 /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3014BB2238BC11000048AD2 /* UserViewController.swift */; };
+		B3014BB5238BD05700048AD2 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3014BB4238BD05700048AD2 /* APIManager.swift */; };
+		B3014BB7238BEB9200048AD2 /* RewardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3014BB6238BEB9200048AD2 /* RewardViewController.swift */; };
+		B3014BB9238BF77B00048AD2 /* RewardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3014BB8238BF77B00048AD2 /* RewardTableViewCell.swift */; };
+		B3014BBB238C29D100048AD2 /* QualificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3014BBA238C29D100048AD2 /* QualificationViewController.swift */; };
+		B3014BBD238CBFC400048AD2 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3014BBC238CBFC400048AD2 /* PostViewController.swift */; };
+		B3014BBF238CBFD700048AD2 /* MissionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3014BBE238CBFD700048AD2 /* MissionViewController.swift */; };
+		B304CE3F239E492F0014ECD4 /* StationTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B304CE3E239E492F0014ECD4 /* StationTabBarViewController.swift */; };
+		B304CE41239E7A580014ECD4 /* SendingStationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B304CE40239E7A580014ECD4 /* SendingStationViewController.swift */; };
+		B304CE43239E7A750014ECD4 /* CancelStationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B304CE42239E7A750014ECD4 /* CancelStationViewController.swift */; };
+		B304CE45239E7A8D0014ECD4 /* ArrivedStationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B304CE44239E7A8D0014ECD4 /* ArrivedStationViewController.swift */; };
+		B30B8003238E1546002A081D /* AddCaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30B8002238E1546002A081D /* AddCaseViewController.swift */; };
+		B30B8005238E6CE3002A081D /* GoodsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30B8004238E6CE3002A081D /* GoodsViewController.swift */; };
+		B30B8009238E6D11002A081D /* GoodsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30B8008238E6D11002A081D /* GoodsTableViewCell.swift */; };
+		B30B800B238E6D21002A081D /* BelongingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30B800A238E6D21002A081D /* BelongingsTableViewCell.swift */; };
+		B30B800D238EB8F0002A081D /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30B800C238EB8F0002A081D /* GameViewController.swift */; };
+		B30B800F238F4415002A081D /* UIImage+Gif.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30B800E238F4415002A081D /* UIImage+Gif.swift */; };
+		B30B8011238F4490002A081D /* sparta.gif in Resources */ = {isa = PBXBuildFile; fileRef = B30B8010238F448F002A081D /* sparta.gif */; };
+		B30B8013238F4932002A081D /* thisIsSparta.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B30B8012238F4931002A081D /* thisIsSparta.mp3 */; };
+		B30B8016238F871A002A081D /* gun.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B30B8014238F871A002A081D /* gun.mp3 */; };
+		B30B8017238F871A002A081D /* scream.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B30B8015238F871A002A081D /* scream.mp3 */; };
+		B30B8019238F9002002A081D /* background.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B30B8018238F9002002A081D /* background.mp3 */; };
+		B30C8B61238B6CD200938954 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30C8B60238B6CD200938954 /* AppDelegate.swift */; };
+		B30C8B63238B6CD200938954 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30C8B62238B6CD200938954 /* SceneDelegate.swift */; };
+		B30C8B68238B6CD200938954 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B30C8B66238B6CD200938954 /* Main.storyboard */; };
+		B30C8B6A238B6CD900938954 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B30C8B69238B6CD900938954 /* Assets.xcassets */; };
+		B30C8B6D238B6CD900938954 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B30C8B6B238B6CD900938954 /* LaunchScreen.storyboard */; };
+		B30C8B78238B6F1C00938954 /* Mercenary.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B30C8B77238B6F1C00938954 /* Mercenary.storyboard */; };
+		B30C8B7A238B713700938954 /* Mortal.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B30C8B79238B713700938954 /* Mortal.storyboard */; };
+		B30C8B7C238B778C00938954 /* APIStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30C8B7B238B778C00938954 /* APIStruct.swift */; };
+		B35A9D0623960527005C3251 /* BankViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35A9D0523960527005C3251 /* BankViewController.swift */; };
+		B35A9D0823964550005C3251 /* MercenaryRuleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35A9D0723964550005C3251 /* MercenaryRuleViewController.swift */; };
+		B36B9921238CF34C008DE886 /* ReportedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36B9920238CF34C008DE886 /* ReportedViewController.swift */; };
+		B36B9923238D40CE008DE886 /* MissionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36B9922238D40CD008DE886 /* MissionTableViewCell.swift */; };
+		B3735708238D819A0003E1B8 /* ChooseHunterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3735707238D819A0003E1B8 /* ChooseHunterTableViewCell.swift */; };
+		B373570C238D83200003E1B8 /* ChooseHunterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B373570B238D83200003E1B8 /* ChooseHunterViewController.swift */; };
+		B38EFB292398B17E00135AF5 /* MercenaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B38EFB282398B17E00135AF5 /* MercenaryViewController.swift */; };
+		B38EFB4B239A5B5800135AF5 /* UserDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B38EFB4A239A5B5800135AF5 /* UserDataViewController.swift */; };
+		B38EFB4D239CA0A800135AF5 /* PreparedStationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B38EFB4C239CA0A800135AF5 /* PreparedStationViewController.swift */; };
+		B38EFB4F239CA0D100135AF5 /* StationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B38EFB4E239CA0D100135AF5 /* StationTableViewCell.swift */; };
+		B38EFB51239CC3E800135AF5 /* SendTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B38EFB50239CC3E800135AF5 /* SendTableViewCell.swift */; };
+		B38EFB53239CC40D00135AF5 /* SendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B38EFB52239CC40D00135AF5 /* SendViewController.swift */; };
+		B38EFB55239D01B100135AF5 /* GameRuleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B38EFB54239D01B100135AF5 /* GameRuleViewController.swift */; };
+		B3CF5D6D238B7C9700A347B8 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3CF5D6C238B7C9700A347B8 /* MainViewController.swift */; };
+		B3CF5D70238B820600A347B8 /* Properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3CF5D6F238B820600A347B8 /* Properties.swift */; };
+		B3CF5D72238B89DC00A347B8 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3CF5D71238B89DC00A347B8 /* SignInViewController.swift */; };
+		B3CF5D74238B89ED00A347B8 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3CF5D73238B89ED00A347B8 /* RegisterViewController.swift */; };
+		B3CF5D76238BA70D00A347B8 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3CF5D75238BA70D00A347B8 /* UserData.swift */; };
+		B3EB501D238D9834006FCC0D /* DecideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3EB501C238D9834006FCC0D /* DecideViewController.swift */; };
+		B3F4A027238DBA58004B5E81 /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F4A026238DBA58004B5E81 /* PostTableViewCell.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		B3014BB2238BC11000048AD2 /* UserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
+		B3014BB4238BD05700048AD2 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
+		B3014BB6238BEB9200048AD2 /* RewardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardViewController.swift; sourceTree = "<group>"; };
+		B3014BB8238BF77B00048AD2 /* RewardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardTableViewCell.swift; sourceTree = "<group>"; };
+		B3014BBA238C29D100048AD2 /* QualificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QualificationViewController.swift; sourceTree = "<group>"; };
+		B3014BBC238CBFC400048AD2 /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
+		B3014BBE238CBFD700048AD2 /* MissionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissionViewController.swift; sourceTree = "<group>"; };
+		B304CE3E239E492F0014ECD4 /* StationTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationTabBarViewController.swift; sourceTree = "<group>"; };
+		B304CE40239E7A580014ECD4 /* SendingStationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendingStationViewController.swift; sourceTree = "<group>"; };
+		B304CE42239E7A750014ECD4 /* CancelStationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancelStationViewController.swift; sourceTree = "<group>"; };
+		B304CE44239E7A8D0014ECD4 /* ArrivedStationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrivedStationViewController.swift; sourceTree = "<group>"; };
+		B30B8002238E1546002A081D /* AddCaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCaseViewController.swift; sourceTree = "<group>"; };
+		B30B8004238E6CE3002A081D /* GoodsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoodsViewController.swift; sourceTree = "<group>"; };
+		B30B8008238E6D11002A081D /* GoodsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoodsTableViewCell.swift; sourceTree = "<group>"; };
+		B30B800A238E6D21002A081D /* BelongingsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BelongingsTableViewCell.swift; sourceTree = "<group>"; };
+		B30B800C238EB8F0002A081D /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
+		B30B800E238F4415002A081D /* UIImage+Gif.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Gif.swift"; sourceTree = "<group>"; };
+		B30B8010238F448F002A081D /* sparta.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = sparta.gif; sourceTree = "<group>"; };
+		B30B8012238F4931002A081D /* thisIsSparta.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = thisIsSparta.mp3; sourceTree = "<group>"; };
+		B30B8014238F871A002A081D /* gun.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = gun.mp3; sourceTree = "<group>"; };
+		B30B8015238F871A002A081D /* scream.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = scream.mp3; sourceTree = "<group>"; };
+		B30B8018238F9002002A081D /* background.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = background.mp3; sourceTree = "<group>"; };
+		B30C8B5D238B6CD200938954 /* Sparta.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sparta.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B30C8B60238B6CD200938954 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		B30C8B62238B6CD200938954 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		B30C8B67238B6CD200938954 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		B30C8B69238B6CD900938954 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B30C8B6C238B6CD900938954 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		B30C8B6E238B6CD900938954 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B30C8B77238B6F1C00938954 /* Mercenary.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Mercenary.storyboard; sourceTree = "<group>"; };
+		B30C8B79238B713700938954 /* Mortal.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Mortal.storyboard; sourceTree = "<group>"; };
+		B30C8B7B238B778C00938954 /* APIStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIStruct.swift; sourceTree = "<group>"; };
+		B35A9D0523960527005C3251 /* BankViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankViewController.swift; sourceTree = "<group>"; };
+		B35A9D0723964550005C3251 /* MercenaryRuleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MercenaryRuleViewController.swift; sourceTree = "<group>"; };
+		B36B9920238CF34C008DE886 /* ReportedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportedViewController.swift; sourceTree = "<group>"; };
+		B36B9922238D40CD008DE886 /* MissionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissionTableViewCell.swift; sourceTree = "<group>"; };
+		B3735707238D819A0003E1B8 /* ChooseHunterTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseHunterTableViewCell.swift; sourceTree = "<group>"; };
+		B373570B238D83200003E1B8 /* ChooseHunterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseHunterViewController.swift; sourceTree = "<group>"; };
+		B38EFB282398B17E00135AF5 /* MercenaryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MercenaryViewController.swift; sourceTree = "<group>"; };
+		B38EFB4A239A5B5800135AF5 /* UserDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataViewController.swift; sourceTree = "<group>"; };
+		B38EFB4C239CA0A800135AF5 /* PreparedStationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreparedStationViewController.swift; sourceTree = "<group>"; };
+		B38EFB4E239CA0D100135AF5 /* StationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationTableViewCell.swift; sourceTree = "<group>"; };
+		B38EFB50239CC3E800135AF5 /* SendTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendTableViewCell.swift; sourceTree = "<group>"; };
+		B38EFB52239CC40D00135AF5 /* SendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendViewController.swift; sourceTree = "<group>"; };
+		B38EFB54239D01B100135AF5 /* GameRuleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameRuleViewController.swift; sourceTree = "<group>"; };
+		B3CF5D6C238B7C9700A347B8 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		B3CF5D6F238B820600A347B8 /* Properties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Properties.swift; sourceTree = "<group>"; };
+		B3CF5D71238B89DC00A347B8 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
+		B3CF5D73238B89ED00A347B8 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
+		B3CF5D75238BA70D00A347B8 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
+		B3EB501C238D9834006FCC0D /* DecideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecideViewController.swift; sourceTree = "<group>"; };
+		B3F4A026238DBA58004B5E81 /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		B30C8B5A238B6CD200938954 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		B30C8B54238B6CD100938954 = {
+			isa = PBXGroup;
+			children = (
+				B30C8B5F238B6CD200938954 /* Sparta */,
+				B30C8B5E238B6CD200938954 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		B30C8B5E238B6CD200938954 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B30C8B5D238B6CD200938954 /* Sparta.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B30C8B5F238B6CD200938954 /* Sparta */ = {
+			isa = PBXGroup;
+			children = (
+				B30B8018238F9002002A081D /* background.mp3 */,
+				B30B8015238F871A002A081D /* scream.mp3 */,
+				B30B8014238F871A002A081D /* gun.mp3 */,
+				B30B8012238F4931002A081D /* thisIsSparta.mp3 */,
+				B30B8010238F448F002A081D /* sparta.gif */,
+				B30C8B76238B6CFF00938954 /* Model */,
+				B30C8B75238B6CFA00938954 /* View */,
+				B30C8B74238B6CF100938954 /* Controller */,
+				B30C8B60238B6CD200938954 /* AppDelegate.swift */,
+				B30C8B62238B6CD200938954 /* SceneDelegate.swift */,
+				B30C8B69238B6CD900938954 /* Assets.xcassets */,
+				B30C8B6E238B6CD900938954 /* Info.plist */,
+				B30B800E238F4415002A081D /* UIImage+Gif.swift */,
+			);
+			path = Sparta;
+			sourceTree = "<group>";
+		};
+		B30C8B74238B6CF100938954 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				B3CF5D6C238B7C9700A347B8 /* MainViewController.swift */,
+				B3CF5D73238B89ED00A347B8 /* RegisterViewController.swift */,
+				B35A9D0523960527005C3251 /* BankViewController.swift */,
+				B35A9D0723964550005C3251 /* MercenaryRuleViewController.swift */,
+				B3014BBA238C29D100048AD2 /* QualificationViewController.swift */,
+				B3CF5D71238B89DC00A347B8 /* SignInViewController.swift */,
+				B3014BB2238BC11000048AD2 /* UserViewController.swift */,
+				B38EFB282398B17E00135AF5 /* MercenaryViewController.swift */,
+				B3014BB6238BEB9200048AD2 /* RewardViewController.swift */,
+				B30B8002238E1546002A081D /* AddCaseViewController.swift */,
+				B3014BBC238CBFC400048AD2 /* PostViewController.swift */,
+				B373570B238D83200003E1B8 /* ChooseHunterViewController.swift */,
+				B3EB501C238D9834006FCC0D /* DecideViewController.swift */,
+				B3014BBE238CBFD700048AD2 /* MissionViewController.swift */,
+				B36B9920238CF34C008DE886 /* ReportedViewController.swift */,
+				B304CE3E239E492F0014ECD4 /* StationTabBarViewController.swift */,
+				B38EFB4C239CA0A800135AF5 /* PreparedStationViewController.swift */,
+				B304CE40239E7A580014ECD4 /* SendingStationViewController.swift */,
+				B304CE42239E7A750014ECD4 /* CancelStationViewController.swift */,
+				B304CE44239E7A8D0014ECD4 /* ArrivedStationViewController.swift */,
+				B38EFB52239CC40D00135AF5 /* SendViewController.swift */,
+				B30B8004238E6CE3002A081D /* GoodsViewController.swift */,
+				B38EFB4A239A5B5800135AF5 /* UserDataViewController.swift */,
+				B38EFB54239D01B100135AF5 /* GameRuleViewController.swift */,
+				B30B800C238EB8F0002A081D /* GameViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		B30C8B75238B6CFA00938954 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				B30C8B6B238B6CD900938954 /* LaunchScreen.storyboard */,
+				B30C8B66238B6CD200938954 /* Main.storyboard */,
+				B30C8B79238B713700938954 /* Mortal.storyboard */,
+				B30C8B77238B6F1C00938954 /* Mercenary.storyboard */,
+				B3014BB8238BF77B00048AD2 /* RewardTableViewCell.swift */,
+				B3F4A026238DBA58004B5E81 /* PostTableViewCell.swift */,
+				B3735707238D819A0003E1B8 /* ChooseHunterTableViewCell.swift */,
+				B36B9922238D40CD008DE886 /* MissionTableViewCell.swift */,
+				B38EFB4E239CA0D100135AF5 /* StationTableViewCell.swift */,
+				B38EFB50239CC3E800135AF5 /* SendTableViewCell.swift */,
+				B30B8008238E6D11002A081D /* GoodsTableViewCell.swift */,
+				B30B800A238E6D21002A081D /* BelongingsTableViewCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		B30C8B76238B6CFF00938954 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				B30C8B7B238B778C00938954 /* APIStruct.swift */,
+				B3CF5D6F238B820600A347B8 /* Properties.swift */,
+				B3CF5D75238BA70D00A347B8 /* UserData.swift */,
+				B3014BB4238BD05700048AD2 /* APIManager.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		B30C8B5C238B6CD200938954 /* Sparta */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B30C8B71238B6CD900938954 /* Build configuration list for PBXNativeTarget "Sparta" */;
+			buildPhases = (
+				B30C8B59238B6CD200938954 /* Sources */,
+				B30C8B5A238B6CD200938954 /* Frameworks */,
+				B30C8B5B238B6CD200938954 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Sparta;
+			productName = Sparta;
+			productReference = B30C8B5D238B6CD200938954 /* Sparta.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		B30C8B55238B6CD100938954 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1110;
+				LastUpgradeCheck = 1110;
+				ORGANIZATIONNAME = "陳姿穎";
+				TargetAttributes = {
+					B30C8B5C238B6CD200938954 = {
+						CreatedOnToolsVersion = 11.1;
+					};
+				};
+			};
+			buildConfigurationList = B30C8B58238B6CD100938954 /* Build configuration list for PBXProject "Sparta" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = B30C8B54238B6CD100938954;
+			productRefGroup = B30C8B5E238B6CD200938954 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				B30C8B5C238B6CD200938954 /* Sparta */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		B30C8B5B238B6CD200938954 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B30C8B7A238B713700938954 /* Mortal.storyboard in Resources */,
+				B30C8B6D238B6CD900938954 /* LaunchScreen.storyboard in Resources */,
+				B30C8B78238B6F1C00938954 /* Mercenary.storyboard in Resources */,
+				B30B8016238F871A002A081D /* gun.mp3 in Resources */,
+				B30C8B6A238B6CD900938954 /* Assets.xcassets in Resources */,
+				B30B8013238F4932002A081D /* thisIsSparta.mp3 in Resources */,
+				B30B8019238F9002002A081D /* background.mp3 in Resources */,
+				B30C8B68238B6CD200938954 /* Main.storyboard in Resources */,
+				B30B8017238F871A002A081D /* scream.mp3 in Resources */,
+				B30B8011238F4490002A081D /* sparta.gif in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		B30C8B59238B6CD200938954 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B3014BB7238BEB9200048AD2 /* RewardViewController.swift in Sources */,
+				B38EFB292398B17E00135AF5 /* MercenaryViewController.swift in Sources */,
+				B30B800B238E6D21002A081D /* BelongingsTableViewCell.swift in Sources */,
+				B38EFB51239CC3E800135AF5 /* SendTableViewCell.swift in Sources */,
+				B38EFB55239D01B100135AF5 /* GameRuleViewController.swift in Sources */,
+				B30B8009238E6D11002A081D /* GoodsTableViewCell.swift in Sources */,
+				B30C8B7C238B778C00938954 /* APIStruct.swift in Sources */,
+				B3014BB5238BD05700048AD2 /* APIManager.swift in Sources */,
+				B3014BBB238C29D100048AD2 /* QualificationViewController.swift in Sources */,
+				B36B9921238CF34C008DE886 /* ReportedViewController.swift in Sources */,
+				B3014BB3238BC11000048AD2 /* UserViewController.swift in Sources */,
+				B3014BBF238CBFD700048AD2 /* MissionViewController.swift in Sources */,
+				B30B800D238EB8F0002A081D /* GameViewController.swift in Sources */,
+				B30B8003238E1546002A081D /* AddCaseViewController.swift in Sources */,
+				B3014BBD238CBFC400048AD2 /* PostViewController.swift in Sources */,
+				B35A9D0823964550005C3251 /* MercenaryRuleViewController.swift in Sources */,
+				B38EFB4F239CA0D100135AF5 /* StationTableViewCell.swift in Sources */,
+				B38EFB4B239A5B5800135AF5 /* UserDataViewController.swift in Sources */,
+				B30B8005238E6CE3002A081D /* GoodsViewController.swift in Sources */,
+				B304CE43239E7A750014ECD4 /* CancelStationViewController.swift in Sources */,
+				B35A9D0623960527005C3251 /* BankViewController.swift in Sources */,
+				B3014BB9238BF77B00048AD2 /* RewardTableViewCell.swift in Sources */,
+				B30C8B61238B6CD200938954 /* AppDelegate.swift in Sources */,
+				B3CF5D76238BA70D00A347B8 /* UserData.swift in Sources */,
+				B3CF5D74238B89ED00A347B8 /* RegisterViewController.swift in Sources */,
+				B3CF5D72238B89DC00A347B8 /* SignInViewController.swift in Sources */,
+				B30C8B63238B6CD200938954 /* SceneDelegate.swift in Sources */,
+				B304CE41239E7A580014ECD4 /* SendingStationViewController.swift in Sources */,
+				B38EFB4D239CA0A800135AF5 /* PreparedStationViewController.swift in Sources */,
+				B304CE3F239E492F0014ECD4 /* StationTabBarViewController.swift in Sources */,
+				B3F4A027238DBA58004B5E81 /* PostTableViewCell.swift in Sources */,
+				B304CE45239E7A8D0014ECD4 /* ArrivedStationViewController.swift in Sources */,
+				B3735708238D819A0003E1B8 /* ChooseHunterTableViewCell.swift in Sources */,
+				B30B800F238F4415002A081D /* UIImage+Gif.swift in Sources */,
+				B3CF5D70238B820600A347B8 /* Properties.swift in Sources */,
+				B36B9923238D40CE008DE886 /* MissionTableViewCell.swift in Sources */,
+				B373570C238D83200003E1B8 /* ChooseHunterViewController.swift in Sources */,
+				B3EB501D238D9834006FCC0D /* DecideViewController.swift in Sources */,
+				B38EFB53239CC40D00135AF5 /* SendViewController.swift in Sources */,
+				B3CF5D6D238B7C9700A347B8 /* MainViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		B30C8B66238B6CD200938954 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B30C8B67238B6CD200938954 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		B30C8B6B238B6CD900938954 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B30C8B6C238B6CD900938954 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		B30C8B6F238B6CD900938954 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		B30C8B70238B6CD900938954 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		B30C8B72238B6CD900938954 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = LNL6T3MTH9;
+				INFOPLIST_FILE = Sparta/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.lacie.Sparta;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		B30C8B73238B6CD900938954 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = LNL6T3MTH9;
+				INFOPLIST_FILE = Sparta/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.lacie.Sparta;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		B30C8B58238B6CD100938954 /* Build configuration list for PBXProject "Sparta" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B30C8B6F238B6CD900938954 /* Debug */,
+				B30C8B70238B6CD900938954 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B30C8B71238B6CD900938954 /* Build configuration list for PBXNativeTarget "Sparta" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B30C8B72238B6CD900938954 /* Debug */,
+				B30C8B73238B6CD900938954 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = B30C8B55238B6CD100938954 /* Project object */;
+}

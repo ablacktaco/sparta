@@ -27,7 +27,7 @@ struct Bank: Codable {
 }
 
 struct DecodeBank: Codable {
-    var key: String
+    var key: Int
 }
 
 struct SignIn: Codable {

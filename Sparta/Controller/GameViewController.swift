@@ -77,7 +77,7 @@ extension GameViewController {
                 }
             }
             
-            self.countDownTimeLabel.text = "剩餘時間： \(initialTime) 秒"
+            self.countDownTimeLabel.text = "Last: \(initialTime) s"
             if initialTime != 0 {
                 initialTime -= 1
             } else {
@@ -250,21 +250,21 @@ extension GameViewController {
         }
         
         bulletCount -= 1
-        bulletCountLabel.text = "剩餘子彈: \(bulletCount) 顆"
+        bulletCountLabel.text = "bullets: \(bulletCount)"
         
         if sprouts.frame.contains(center.center) {
             if !sprouts.isHidden {
                 timerInvalidate()
                 countDownTimeLabel.text = "GAME OVER"
                 point = 0
-                pointLabel.text = "得分: \(point) 分"
+                pointLabel.text = "Points: \(point)"
                 shotSproutsAlert()
                 return
             }
         } else if oldFish.frame.contains(center.center) {
             if !oldFish.isHidden {
                 point += 10
-                pointLabel.text = "得分: \(point) 分"
+                pointLabel.text = "Points: \(point)"
             }
         } else if wangwang.frame.contains(center.center) {
             if !wangwang.isHidden {
@@ -272,22 +272,22 @@ extension GameViewController {
                 if point < 0 {
                     point = 0
                 }
-                pointLabel.text = "得分: \(point) 分"
+                pointLabel.text = "Points: \(point)"
             }
         } else if louis.frame.contains(center.center) {
             if !louis.isHidden {
                 point += 30
-                pointLabel.text = "得分: \(point) 分"
+                pointLabel.text = "Points: \(point)"
             }
         } else if charleen.frame.contains(center.center) {
             if !charleen.isHidden {
                 point += 50
-                pointLabel.text = "得分: \(point) 分"
+                pointLabel.text = "Points: \(point)"
             }
         } else if jes.frame.contains(center.center) {
             if !jes.isHidden {
                 point += 100
-                pointLabel.text = "得分: \(point) 分"
+                pointLabel.text = "Points: \(point)"
             }
         }
         
