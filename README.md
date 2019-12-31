@@ -104,5 +104,8 @@
 
 * 斯巴達人的收入來源！
 * 攻擊敵對雅典陣營的成員來獲得國家補助
+* 長按上下左右移動，點擊射擊鍵攻擊
+* 每個成員有不同的運動模式及分數
+* 若時間到/用光子彈/射擊到貓貓豆芽皆會結束遊戲
 
 ![](https://github.com/ablacktaco/sparta/blob/master/shot1.gif) ![](https://github.com/ablacktaco/sparta/blob/master/shot2.gif)
