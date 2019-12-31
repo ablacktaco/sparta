@@ -75,3 +75,34 @@
 ![](https://github.com/ablacktaco/sparta/blob/master/decide1.gif) ![](https://github.com/ablacktaco/sparta/blob/master/decide2.gif)
 
 ### 貿易中心
+
+* (串接貿易中心陣營API)點選購買商品，需輸入金流中心金鑰，由金流中心轉帳給貿易中心陣營
+
+![](https://github.com/ablacktaco/sparta/blob/master/buy.gif)
+
+### 個人頁面
+
+* 顯示個人身份資料
+* 於貿易中心購買的商品及懸賞任務蒐集到的物品皆會顯示於個人頁面的所有物中
+* 若忘記金流中心金鑰，可於此頁面查詢
+* 點選照片可更換大頭貼(拍照或相片選取，主頁同步更新)
+
+![](https://github.com/ablacktaco/sparta/blob/master/profile.gif)
+
+### 驛站 / 寄送物品
+
+* (串接驛站陣營API)檢視從斯巴達寄出的貨物的狀態及所在位置
+
+![](https://github.com/ablacktaco/sparta/blob/master/station.gif)
+
+* 可從個人所有物中選取物品寄送
+* 設定寄送物品、地點、物品重量及運費後寄送，刊登後物品轉為準備中狀態等待寄送
+
+![](https://github.com/ablacktaco/sparta/blob/master/send.gif)
+
+### 射擊小遊戲
+
+* 斯巴達人的收入來源！
+* 攻擊敵對雅典陣營的成員來獲得國家補助
+
+![](https://github.com/ablacktaco/sparta/blob/master/shot1.gif) ![](https://github.com/ablacktaco/sparta/blob/master/shot2.gif)
